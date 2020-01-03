@@ -8,26 +8,28 @@ print(df_file.head())
 checker = "\n *** \n Testing \n *** \n"
 
 def data_tranformation():
-    df_sql = pd.read_excel(loc)
-    db_filename = r"mydb.db"
-    con = lite.connect(db_filename)
-    df_sql.to_sql("mytable", con, if_exists="replace", index=True)
+    df_csv = pd.read_excel(loc)
+    df_csv.to_csv("kfc_monstercopy.csv", index=False)
+    #CSV files are easier to parse through, using resources available to me
+    print(df_csv.head())
 
-    print(df_sql.head())
 
-def sql_cleaning():
+def csv_cleaning():
     #This function should clean the database and create a cleaned copy
     #The cleaned copy will focus on monsters from the core books, to limit the scope
     try:
-        db_name = r"venv/mydb.db"
-        con = lite.connect(db_name)
+        data_tranformation()
+        csv_unclean = pd.read_csv("kfc_monstercopy.csv")
+        df = csv_unclean.fillna("Missing data") #Replace any null values
+        df.columns = df.columns.str.replace("?", "")
+        df.columns = df.columns.str.replace(" ", "")
+        #Replace any white spaces in column names and any non letters / numbers
+
+
+
+        print(list(df), df)
         print(checker)
-        df_sqlread = pd.read_sql("mytable")
     except:
         print("an error occured")
-
-
-sql_cleaning()
-
 
 
