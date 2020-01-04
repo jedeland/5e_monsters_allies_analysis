@@ -1,11 +1,12 @@
-import pandas as pd; import numpy as np; import urllib.request; import sqlite3 as lite; import sqlalchemy as sql
+import pandas as pd; import numpy as np; import urllib.request;
+import sqlite3 as lite; import sqlalchemy as sql; import string
 #Pandas and sqlalchemy have to be initialised with the terminal, use pip install x to do so
 
 #Move these options to interface in future
 pd.set_option('display.max_columns', None)
 
 
-loc = "datasets/kfc_monsters.xlsx"
+loc = "kfc_monsters.xlsx"
 df_file = pd.read_excel(loc)
 print(df_file.head())
 checker = "\n *** \n Testing \n *** \n"
