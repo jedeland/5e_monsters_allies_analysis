@@ -31,28 +31,43 @@ def csv_cleaning():
         df.columns = df.columns.str.replace(" ", "")
         #Replace any white spaces in column names and question marks
         newcolumn = refine_sources(df)
+        print(newcolumn)
+        df["smallsrc"] = newcolumn["sources"]
+        df = df.drop("sources", axis=1)
+        df = df.dropna()
+        print(df)
+
     except:
         print("an error occured")
+
 
 
 def refine_sources(df):
     # Creating new column for page number
     splitcolumn = df["sources"].str.split(": ", n=1, expand=True)
     # print("Trying to output new column \n", splitcolumn, list(splitcolumn))
+    clean_refined_sources(df, splitcolumn)
+    print(list(df), df)
+    select_sources = df["sources"].values
+    #sourcenames = df["sources"].unique()
+    #1print(sourcenames)
+    select_sources = df.loc[df["sources"].values == 'monstermanual']
+    adder = df.loc[df["sources"].values == 'volosguidetomonsters']
+    #Implement Mordakiens tomb of foes if data is accessable
+    select_sources = select_sources.append(adder)
+    #print(checker, selectsources["sources"])
+    return select_sources
+
+
+def clean_refined_sources(df, splitcolumn):
+    #This function cleans the sources and name columns, and splits the source column into two
+    #Seperate columns, namely the pagenumber and source columns (using a delimiter)
     df["pagenum"], df["sources"] = splitcolumn[1], splitcolumn[0]
     df["sources"] = df["sources"].str.replace(" ", "")
     df["sources"] = df["sources"].str.replace("[^\w\s]", "")
-    df["sources"] = [x.lower() for x in df["sources"]]
-    print(list(df), df)
-    selectsources = df["sources"].values
-    sourcenames = df["sources"].unique()
-    print(sourcenames)
-    selectsources = df.loc[df["sources"].values == 'monstermanual']
-    adder = df.loc[df["sources"].values == 'volosguidetomonsters']
-    #Implement Mordakiens tomb of foes if data is accessable
-    selectsources = selectsources.append(adder)
-    print(checker, selectsources["sources"])
-    return selectsources
+    df["name"] = df["name"].str.replace(" ", "-")
+    df["name"] = df["name"].str.replace("[^\w-]", "")
+    df["sources"], df["name"] = [x.lower() for x in df["sources"]], [y.lower() for y in df["name"]]
 
 
 csv_cleaning()
