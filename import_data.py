@@ -8,7 +8,7 @@ pd.set_option('display.max_columns', None)
 
 loc = "kfc_monsters.xlsx"
 df_file = pd.read_excel(loc)
-print(df_file.head())
+#print(df_file.head())
 checker = "\n *** \n Testing \n *** \n"
 
 def data_tranformation():
@@ -18,7 +18,7 @@ def data_tranformation():
 
 
 
-def csv_cleaning():
+def csv_cleaner():
     #This function should clean the database and create a cleaned copy
     #The cleaned copy will focus on monsters from the core books, to limit the scope
     try:
@@ -26,16 +26,17 @@ def csv_cleaning():
         csv_unclean = pd.read_csv("kfc_monstercopy.csv")
         df = pd.DataFrame(csv_unclean)
         df = df.fillna(0) #Replace any null values
-        #print(df.head())
         df.columns = df.columns.str.replace("?", "")
         df.columns = df.columns.str.replace(" ", "")
         #Replace any white spaces in column names and question marks
         newcolumn = refine_sources(df)
-        print(newcolumn)
+        #print(newcolumn)
         df["smallsrc"] = newcolumn["sources"]
         df = df.drop("sources", axis=1)
         df = df.dropna()
+
         print(df)
+        return df
 
     except:
         print("an error occured")
@@ -47,10 +48,8 @@ def refine_sources(df):
     splitcolumn = df["sources"].str.split(": ", n=1, expand=True)
     # print("Trying to output new column \n", splitcolumn, list(splitcolumn))
     clean_refined_sources(df, splitcolumn)
-    print(list(df), df)
+    #print(list(df), df)
     select_sources = df["sources"].values
-    #sourcenames = df["sources"].unique()
-    #1print(sourcenames)
     select_sources = df.loc[df["sources"].values == 'monstermanual']
     adder = df.loc[df["sources"].values == 'volosguidetomonsters']
     #Implement Mordakiens tomb of foes if data is accessable
@@ -68,7 +67,16 @@ def clean_refined_sources(df, splitcolumn):
     df["name"] = df["name"].str.replace(" ", "-")
     df["name"] = df["name"].str.replace("[^\w-]", "")
     df["sources"], df["name"] = [x.lower() for x in df["sources"]], [y.lower() for y in df["name"]]
+    #Fixes issue with CR being converted to dates, should add preconditions in future
+    df.loc[df["cr"].values == "2017-01-02 00:00:00", "cr"] = "1/2" #Typed as 1/2 CR
+    df.loc[df["cr"].values == "2017-01-04 00:00:00", "cr"] = "1/4" #Typed as 1/4 CR
+    df.loc[df["cr"].values == "2017-01-08 00:00:00", "cr"] = "1/8" #Typed as 1/8 CR
+    #print(df["cr"].unique())
+    #print(df.loc[df["cr"] == "1/2"])
 
 
-csv_cleaning()
+
+
+
+csv_cleaner()
 
