@@ -1,4 +1,4 @@
-import pandas as pd; import numpy as np; import urllib.request;
+import pandas as pd; import numpy as np; import urllib.request
 import sqlite3 as lite; import sqlalchemy as sql; import string
 #Pandas and sqlalchemy have to be initialised with the terminal, use pip install x to do so
 
@@ -68,9 +68,10 @@ def clean_refined_sources(df, splitcolumn):
     df["name"] = df["name"].str.replace("[^\w-]", "")
     df["sources"], df["name"] = [x.lower() for x in df["sources"]], [y.lower() for y in df["name"]]
     #Fixes issue with CR being converted to dates, should add preconditions in future
-    df.loc[df["cr"].values == "2017-01-02 00:00:00", "cr"] = "1/2" #Typed as 1/2 CR
-    df.loc[df["cr"].values == "2017-01-04 00:00:00", "cr"] = "1/4" #Typed as 1/4 CR
-    df.loc[df["cr"].values == "2017-01-08 00:00:00", "cr"] = "1/8" #Typed as 1/8 CR
+    df.loc[df["cr"].values == "2017-01-02 00:00:00", "cr"] = "0.5" #Typed as 1/2 CR
+    df.loc[df["cr"].values == "2017-01-04 00:00:00", "cr"] = "0.25" #Typed as 1/4 CR
+    df.loc[df["cr"].values == "2017-01-08 00:00:00", "cr"] = "0.125" #Typed as 1/8 CR
+    df["cr"] = df["cr"].apply(pd.to_numeric)
     #print(df["cr"].unique())
     #print(df.loc[df["cr"] == "1/2"])
 
