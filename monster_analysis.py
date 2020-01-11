@@ -10,6 +10,8 @@ those being the monster manual and volos guide to monsters, with an intention to
 checker = "\n *** \n Testing \n *** \n"
 divider = "\n***\n***\n"
 question = "Type 1 for yes, or 2 for no"
+#Could create global variable to implement the DataFrame, but using local variables to return particular outputs
+#For future use with the interface file
 
 def find_average_cr():
     #Finds average CR, may need to convert CR column to int/double for this
@@ -17,6 +19,7 @@ def find_average_cr():
     print(checker, df_copy)
     print("The mean value of the challenge rating is {0:.1f}".format(df_copy["cr"].mean()), divider)
     print("The mode value of the challenge rating is {0:.1f}".format(int(df_copy["cr"].mode())))
+    return df_copy["cr"].mean()
 def find_quantile_cr():
     #Finds the average CR of each quantile, and outputs a CR average that fits into the "normal" range
     #Aka, between .25 and .75
@@ -44,10 +47,22 @@ def iqr_monster_cr():
 def ranked_by_cr():
     df_copy = import_data.csv_cleaner()
     df_copy["rankedcr"] = df_copy["cr"].rank(ascending=1)
-    print(divider, "The 40 least challenging monsters are \n", df_copy[df_copy["rankedcr"] < 41])
-    print(divider, "The 40 most challenging monsters are \n", df_copy[df_copy["rankedcr"] > 335])
+    print(divider, "The least challenging monsters are \n", df_copy[df_copy["rankedcr"] < 40].sort_values("rankedcr"))
+    print(divider, "The most challenging monsters are \n", df_copy[df_copy["rankedcr"] > 330].sort_values("rankedcr"))
+
+def standard_dev_cr():
+    df_copy = import_data.csv_cleaner()
+    average = find_average_cr()
+    std_cr = df_copy["cr"].std()
+    top_range_monsters = average + std_cr * 1.96
+    low_range_monsters = average - std_cr * 1.96
+    df_out = df_copy
+    #Create dataframe for returning information
+    #Holds the top monsters to fight - print(df_out[df_out["cr"] > top_range_monsters].values)
+    #Hold the bottom mosnters to fight - print(df_out[df_out["cr"] < low_range_monsters].values)
+    df_out = df_out.drop(df_out[df_out["cr"] > top_range_monsters].index)
+    df_out = df_out.drop(df_out[df_out["cr"] < low_range_monsters].index)
+    print(df_out)
 
 
-find_quantile_cr()
-iqr_monster_cr()
-ranked_by_cr()
+standard_dev_cr()
