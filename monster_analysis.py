@@ -8,7 +8,7 @@ those being the monster manual and volos guide to monsters, with an intention to
 '''
 
 checker = "\n *** \n Testing \n *** \n"
-divider = "\n***\n***"
+divider = "\n***\n***\n"
 question = "Type 1 for yes, or 2 for no"
 
 def find_average_cr():
@@ -39,8 +39,15 @@ def iqr_monster_cr():
     df_iqr = df_iqr.drop(df_iqr[df_iqr["cr"] > top_range_monsters].index)
     df_iqr = df_iqr.drop(df_iqr[df_iqr["cr"] < low_range_monsters].index)
     print("Printing monsters withing the IQR \n", df_iqr) #The IQR is quite compact, only 12 rows are dropped using this
-    #STDEV would be more useful with the values given 
+    #STDEV would be more useful with the values given
+
+def ranked_by_cr():
+    df_copy = import_data.csv_cleaner()
+    df_copy["rankedcr"] = df_copy["cr"].rank(ascending=1)
+    print(divider, "The 40 least challenging monsters are \n", df_copy[df_copy["rankedcr"] < 41])
+    print(divider, "The 40 most challenging monsters are \n", df_copy[df_copy["rankedcr"] > 335])
 
 
 find_quantile_cr()
 iqr_monster_cr()
+ranked_by_cr()
