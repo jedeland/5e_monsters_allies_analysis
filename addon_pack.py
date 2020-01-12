@@ -44,7 +44,7 @@ def choose_monster(cr_in):
     print(df_refined.keys())
     for i in range(len(monster_list)):
         monster_row = df_refined[df_refined.index == monster_list[i]]
-        print(monster_row)
+        print(monster_row[["name", "hp", "ac", "size", "src", "pagenum", "section", "environment", "alignment"]])
         print("\n***\n")
 
 
