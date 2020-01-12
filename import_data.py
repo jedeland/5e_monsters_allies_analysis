@@ -35,7 +35,7 @@ def csv_cleaner():
         df = df.drop("sources", axis=1)
         df = df.dropna()
 
-        print(df)
+        #print(df)
         return df
 
     except:
