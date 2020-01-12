@@ -33,8 +33,22 @@ def choose_monster(cr_in):
     df_copy = monster_analysis.standard_dev_cr() #Uses standard dev to create a more relevant df
     df_refined = df_copy[round(df_copy["cr"]) == cr_in]
     df_refined = df_refined.drop(df_refined[df_refined["legendary"].values == "legendary"].index)
+    df_refined = df_refined.drop(df_refined[df_refined["lair"].values == "lair"].index)
+    print(df_refined.index.tolist())
+    monster_list = df_refined.index.tolist()
+    print(monster_list[np.random.randint(0, len(monster_list))])
+    while len(monster_list) > 3:
+        monster_list.pop(np.random.randint(len(monster_list)))
+    print(monster_list)
+    print("Your options for a witcherfied monster are: ")
+    print(df_refined.keys())
+    for i in range(len(monster_list)):
+        monster_row = df_refined[df_refined.index == monster_list[i]]
+        print(monster_row)
+        print("\n***\n")
 
-    print(df_refined.head())
+
+    #print(df_refined.head())
 
 
 

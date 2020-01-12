@@ -31,7 +31,7 @@ def csv_cleaner():
         #Replace any white spaces in column names and question marks
         newcolumn = refine_sources(df)
         #print(newcolumn)
-        df["smallsrc"] = newcolumn["sources"]
+        df["src"] = newcolumn["sources"]
         df = df.drop("sources", axis=1)
         df = df.dropna()
 
