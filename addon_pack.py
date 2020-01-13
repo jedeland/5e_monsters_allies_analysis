@@ -34,25 +34,26 @@ def refine_monster(cr_in):
     df_refined = df_copy[round(df_copy["cr"]) == cr_in]
     df_refined = df_refined.drop(df_refined[df_refined["legendary"].values == "legendary"].index)
     df_refined = df_refined.drop(df_refined[df_refined["lair"].values == "lair"].index)
-    print(df_refined.index.tolist())
+
     monster_list = df_refined.index.tolist()
-    print(monster_list[np.random.randint(0, len(monster_list))])
     while len(monster_list) > 3:
         monster_list.pop(np.random.randint(len(monster_list)))
-    print(monster_list)
+
     print("Your options for a witcherfied monster are: ")
     #print(df_refined.keys())
     monster_selections = []
     refine_selections(df_refined, monster_list, monster_selections)
-    print("Your options of selection are:")
+    monster_selections = choose_monster(df_refined, monster_list, monster_selections)
+    #print(monster_selections) Test
+
+
+def choose_monster(df_refined, monster_list, monster_selections):
+    print("Your options to select are:")
     print("1: {0} \n2: {1} \n3: {2}".format(monster_selections[0], monster_selections[1], monster_selections[2]))
     monster_choice = input("Please type the number of your preferred monster, from the list: ")
-    monster_list = monster_list.drop(monster_list[monster_list["name"] != mon])
-
-
-
-
-
+    monster_list = df_refined[df_refined.index == monster_list[int(monster_choice) - 1]]
+    print("You have selected the {}".format(monster_list["name"].values))
+    return monster_list
 
 
 def refine_selections(df_refined, monster_list, monster_selections):
