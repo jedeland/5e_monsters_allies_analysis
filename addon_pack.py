@@ -6,11 +6,26 @@ def witcherify_monster():
     vulnerabilities = []
     resistance = []
     invulnerability = []
+    df_copy = monster_analysis.standard_dev_cr()
+
+    #This list of damage types was taken from https://www.reddit.com/r/dndnext/comments/9w5ho5/im_compiling_a_list_of_all_sources_of_resistance/
+    #Kudos to u/LyschkoPlon for creating it
+    dnd_5e_damage = ["Poison", "Fire", "Psychic", "Necrotic", "Cold", "Acid", "Piercing", "Slashing", "Bludgeoning",
+                    "Magical (Weapon)", "Magical (Spell)", "Thunder", "Lightning", "Radiant", "Force",
+                     "Weapon (Ranged)", "Weapon (Melee)"]
+    #These damage types should not appear on the same monster
+    non_compat_damage = {"Fire": "Cold", "Bludgeoning": "Piercing", "Necrotic": "Radiant",
+                         "Cold": "Fire", "Piercing": "Bludgeoning", "Radiant": "Necrotic"}
+    #Lures needs to be improved, or can be added by the user using line interface
+    #Lures could use creature types instead of names, to generalise the output
+    lures = ["The creature is attracted to the scent of {} meat".format(df_copy["type"].sample().values),
+             "The creature is attracted to the scent of {} meat".format(df_copy["name"].sample().values)]
 
     print("This function witcherifies a monster, using the rules proscribed in this video\n",
           "https://youtu.be/GhjkPv4qo5w\n"
            )
     group_in = input("Please type the size of the group: ")
+
     if group_in.isdigit() and group_in != "1":
         print("Please type in the levels of the group")
         level_inputs = []
@@ -24,6 +39,23 @@ def witcherify_monster():
               "\nThat means the average level is {}".format(average_lvl),
               "\nThe witcherified monster should be CR: {}".format(cr_out))
         monster = refine_monster(cr_out) #Continue after function is completed
+
+        monster["hp"] = int(monster["hp"])/2
+        num_immunity = round(int(monster["cr"])/3)
+        num_resistance = None
+        num_vulnerabilites = None
+        if int(monster["cr"]) < 9:
+            num_resistance = round(int(monster["cr"]))
+            num_vulnerabilites = np.random.randint(1,2)
+        else:
+            num_resistance = round(int(monster["cr"]) - 2)
+            num_vulnerabilites = np.random.randint(2,4)
+
+
+        print("Because of the creatures strength, mutation or otherwise ungodly powers, it has gained {0} immunities and {1} resistances!".
+              format(num_immunity, num_resistance))
+        print("In addition, the monster has become vulnerable to {} types of damage".format(num_vulnerabilites))
+        print(monster.values)
     else:
         print("This is an invalid input, please ensure the input is numeric and above 1")
         pass
@@ -45,6 +77,7 @@ def refine_monster(cr_in):
     refine_selections(df_refined, monster_list, monster_selections)
     monster_selections = choose_monster(df_refined, monster_list, monster_selections)
     #print(monster_selections) Test
+    return monster_selections
 
 
 def choose_monster(df_refined, monster_list, monster_selections):
