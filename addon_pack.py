@@ -39,26 +39,32 @@ def witcherify_monster():
               "\nThat means the average level is {}".format(average_lvl),
               "\nThe witcherified monster should be CR: {}".format(cr_out))
         monster = refine_monster(cr_out) #Continue after function is completed
+        mutate_monster(monster)
 
-        monster["hp"] = int(monster["hp"])/2
-        num_immunity = round(int(monster["cr"])/3)
-        num_resistance = None
-        num_vulnerabilites = None
-        if int(monster["cr"]) < 9:
-            num_resistance = round(int(monster["cr"]))
-            num_vulnerabilites = np.random.randint(1,2)
-        else:
-            num_resistance = round(int(monster["cr"]) - 2)
-            num_vulnerabilites = np.random.randint(2,4)
-
-
-        print("Because of the creatures strength, mutation or otherwise ungodly powers, it has gained {0} immunities and {1} resistances!".
-              format(num_immunity, num_resistance))
-        print("In addition, the monster has become vulnerable to {} types of damage".format(num_vulnerabilites))
-        print(monster.values)
     else:
         print("This is an invalid input, please ensure the input is numeric and above 1")
         pass
+
+
+def mutate_monster(monster):
+    monster["hp"] = int(monster["hp"]) / 2
+    num_immunity = round(int(monster["cr"]) / 3)
+    num_resistance = None
+    num_vulnerabilites = None
+    if int(monster["cr"]) < 9:
+        num_resistance = round(int(monster["cr"]))
+        num_vulnerabilites = np.random.randint(1, 2)
+    else:
+        num_resistance = round(int(monster["cr"]) - 2)
+        num_vulnerabilites = np.random.randint(1, 3)
+    print(
+        "Because of the creatures strength, mutation or otherwise ungodly powers, it has gained {0} immunities and {1} resistances!".
+        format(num_immunity, num_resistance))
+    print("In addition, the monster has become vulnerable to {} types of damage".format(num_vulnerabilites))
+    print(monster.values)
+    monster_dict = monster.to_dict()
+    print(monster_dict.get("name"))
+
 
 def refine_monster(cr_in):
     #This function aims to choose a random monster based on the CR set above
