@@ -1642,3 +1642,144 @@ c6323018-2f32-49bd-8b94-2889024f4dbc,volo.xvart,Xvart,2017-01-08 00:00:00,Small,
 6c82d15c-907b-48e0-8866-dcb7f3e4cd0c,volo.yuan-ti-mind-whisperer,Yuan-ti Mind Whisperer,4,Medium,Monstrosity,"Shapechanger, Yuan-ti",Yuan-ti,neutral evil,"desert, forest, underground",14,71,2,,,,Volo's Guide to Monsters: 204
 16795632-bba4-48e3-86cd-08d66cbdd4b5,volo.yuan-ti-nightmare-speaker,Yuan-ti Nightmare Speaker,4,Medium,Monstrosity,"Shapechanger, Yuan-ti",Yuan-ti,neutral evil,"desert, forest, underground",14,71,2,,,,Volo's Guide to Monsters: 205
 cc9084c4-a3ed-4ffd-9273-e68a03b5b40f,volo.yuan-ti-pit-master,Yuan-ti Pit Master,5,Medium,Monstrosity,"Shapechanger, Yuan-ti",Yuan-ti,neutral evil,"desert, forest, underground",14,88,2,,,,Volo's Guide to Monsters: 206
+,mtof.allip,Allip,5,Medium,Undead,,,neutral evil,"dungeon, ruins",13,40,3,,,,Mordenkainen's Tome of Foes: 116
+,mtof.astral-dreadnought,Astral Dreadnought,21,Gargantuan,Monstrosity,Titan,,unaligned,planar,20,297,-2,,legendary,,Mordenkainen's Tome of Foes: 117
+,mtof.balhannoth,Balhannoth,17,Large,Aberration,,,chaotic evil,"cave, urban, underground",17,114,-1,,legendary,,Mordenkainen's Tome of Foes: 119
+,mtof.berbalang,Berbalang,2,Medium,Aberration,,,neutral evil,planar,14,38,3,,,,Mordenkainen's Tome of Foes: 120
+,mtof.boneclaw,Boneclaw,12,Large,Undead,,,chaotic evil,"dungeon, ruins, underground",16,127,3,,,,Mordenkainen's Tome of Foes: 121
+,mtof.cadaver-collector,Cadaver Collector,14,Large,Construct,,,lawful evil,"planar, ruins",17,189,2,,,,Mordenkainen's Tome of Foes: 122
+,mtof.choker,Choker,1,Small,Aberration,,,chaotic evil,"cave, underground",16,13,2,,,,Mordenkainen's Tome of Foes: 123
+,mtof.bronze-scout,Bronze Scout,1,Medium,Construct,,Clockworks,unaligned,planar,13,18,3,,,,Mordenkainen's Tome of Foes: 125
+,mtof.iron-cobra,Iron Cobra,4,Medium,Construct,,Clockworks,unaligned,planar,13,45,3,,,,Mordenkainen's Tome of Foes: 125
+,mtof.oaken-bolter,Oaken Bolter,5,Medium,Construct,,Clockworks,unaligned,planar,16,58,4,,,,Mordenkainen's Tome of Foes: 126
+,mtof.stone-defender,Stone Defender,4,Medium,Construct,,Clockworks,unaligned,planar,16,52,0,,,,Mordenkainen's Tome of Foes: 126
+,mtof.corpse-flower,Corpse Flower,8,Large,Plant,,,chaotic evil,"forest, ruins, swamp, urban",12,127,2,,,,Mordenkainen's Tome of Foes: 127
+,mtof.deathlock,Deathlock,4,Medium,Undead,,,neutral evil,,12,36,2,,,,Mordenkainen's Tome of Foes: 128
+,mtof.deathlock-mastermind,Deathlock Mastermind,8,Medium,Undead,,,neutral evil,,13,110,3,,,,Mordenkainen's Tome of Foes: 129
+,mtof.deathlock-wight,Deathlock Wight,3,Medium,Undead,,,neutral evil,,12,37,2,,,,Mordenkainen's Tome of Foes: 129
+,mtof.alkilith,Alkilith,11,Medium,Fiend,Demon,Demons,chaotic evil,"ruins, urban",17,157,4,,,,Mordenkainen's Tome of Foes: 130
+,mtof.armanite,Armanite,7,Large,Fiend,Demon,Demons,chaotic evil,planar,16,84,4,,,,Mordenkainen's Tome of Foes: 131
+,mtof.bulezau,Bulezau,3,Medium,Fiend,Demon,Demons,chaotic evil,planar,14,52,2,,,,Mordenkainen's Tome of Foes: 131
+,mtof.dybbuk,Dybbuk,4,Medium,Fiend,Demon,Demons,chaotic evil,planar,14,37,4,,,,Mordenkainen's Tome of Foes: 132
+,mtof.maurezhi,Maurezhi,7,Medium,Fiend,Demon,Demons,chaotic evil,planar,15,88,3,,,,Mordenkainen's Tome of Foes: 133
+,mtof.molydeus,Molydeus,21,Huge,Fiend,Demon,Demons,chaotic evil,planar,19,216,6,,legendary,,Mordenkainen's Tome of Foes: 134
+,mtof.nabassu,Nabassu,15,Medium,Fiend,Demon,Demons,chaotic evil,planar,18,190,2,,,,Mordenkainen's Tome of Foes: 135
+,mtof.rutterkin,Rutterkin,2,Medium,Fiend,Demon,Demons,chaotic evil,planar,12,37,2,,,,Mordenkainen's Tome of Foes: 136
+,mtof.abyssal-wretch,Abyssal Wretch,2018-01-04 00:00:00,Medium,Fiend,Demon,Demons,chaotic evil,planar,11,18,1,,,,Mordenkainen's Tome of Foes: 136
+,mtof.sibriex,Sibriex,18,Huge,Fiend,Demon,Demons,chaotic evil,planar,19,150,-4,,legendary,,Mordenkainen's Tome of Foes: 137
+,mtof.wastrilith,Wastrilith,13,Large,Fiend,Demon,Demons,chaotic evil,"aquatic, planar",18,157,4,,,,Mordenkainen's Tome of Foes: 139
+,mtof.baphomet,Baphomet,23,Huge,Fiend,Demon,Demon Lords,chaotic evil,planar,22,275,2,lair,legendary,unique,Mordenkainen's Tome of Foes: 143
+,mtof.demogorgon,Demogorgon,26,Huge,Fiend,Demon,Demon Lords,chaotic evil,planar,22,406,2,lair,legendary,unique,Mordenkainen's Tome of Foes: 144
+,mtof.fraz-urbluu,Fraz-Urb'luu,23,Large,Fiend,Demon,Demon Lords,chaotic evil,planar,18,337,1,,legendary,unique,Mordenkainen's Tome of Foes: 146
+,mtof.fraz-urbluu-in-lair,Fraz-Urb'luu (in lair),24,Large,Fiend,Demon,Demon Lords,chaotic evil,planar,18,337,1,lair,legendary,unique,Mordenkainen's Tome of Foes: 146
+,mtof.grazzt,Graz'zt,24,Large,Fiend,Demon,Demon Lords,chaotic evil,planar,20,346,2,lair,legendary,unique,Mordenkainen's Tome of Foes: 149
+,mtof.juiblex,Juiblex,23,Huge,Fiend,Demon,Demon Lords,chaotic evil,planar,18,350,0,lair,legendary,unique,Mordenkainen's Tome of Foes: 151
+,mtof.orcus,Orcus,26,Huge,Fiend,Demon,Demon Lords,chaotic evil,planar,17,405,2,lair,legendary,unique,Mordenkainen's Tome of Foes: 153
+,mtof.yeenoghu,Yeenoghu,24,Huge,Fiend,Demon,Demon Lords,chaotic evil,planar,20,333,3,lair,legendary,unique,Mordenkainen's Tome of Foes: 155
+,mtof.zuggtmoy,Zuggtmoy,23,Large,Fiend,Demon,Demon Lords,chaotic evil,planar,18,304,2,lair,legendary,unique,Mordenkainen's Tome of Foes: 157
+,mtof.derro,Derro,2018-01-04 00:00:00,Small,Humanoid,Derro,Derro,chaotic evil,"underground, urban",13,13,2,,,,Mordenkainen's Tome of Foes: 158
+,mtof.derro-savant,Derro Savant,3,Small,Humanoid,Derro,Derro,chaotic evil,"underground, urban",13,36,2,,,,Mordenkainen's Tome of Foes: 159
+,mtof.black-abishai,Black Abishai,7,Medium,Fiend,Devil,Devils,lawful evil,planar,15,58,3,,,,Mordenkainen's Tome of Foes: 160
+,mtof.blue-abishai,Blue Abishai,17,Medium,Fiend,Devil,Devils,lawful evil,planar,19,195,2,,,,Mordenkainen's Tome of Foes: 161
+,mtof.green-abishai,Green Abishai,15,Medium,Fiend,Devil,Devils,lawful evil,planar,18,187,3,,,,Mordenkainen's Tome of Foes: 162
+,mtof.red-abishai,Red Abishai,19,Medium,Fiend,Devil,Devils,lawful evil,planar,22,255,3,,,,Mordenkainen's Tome of Foes: 162
+,mtof.white-abishai,White Abishai,6,Medium,Fiend,Devil,Devils,lawful evil,planar,15,68,0,,,,Mordenkainen's Tome of Foes: 163
+,mtof.amnizu,Amnizu,18,Medium,Fiend,Devil,Devils,lawful evil,planar,21,202,1,,,,Mordenkainen's Tome of Foes: 164
+,mtof.hellfire-engine,Hellfire Engine,16,Huge,Construct,,Devils,lawful evil,planar,18,216,3,,,,Mordenkainen's Tome of Foes: 165
+,mtof.merregon,Merregon,4,Medium,Fiend,Devil,Devils,lawful evil,planar,16,45,2,,,,Mordenkainen's Tome of Foes: 166
+,mtof.narzugon,Narzugon,13,Medium,Fiend,Devil,Devils,lawful evil,planar,20,112,0,,,,Mordenkainen's Tome of Foes: 167
+,mtof.nupperibo,Nupperibo,2018-01-02 00:00:00,Medium,Fiend,Devil,Devils,lawful evil,planar,13,11,0,,,,Mordenkainen's Tome of Foes: 168
+,mtof.orthon,Orthon,10,Large,Fiend,Devil,Devils,lawful evil,planar,17,105,3,,,,Mordenkainen's Tome of Foes: 169
+,mtof.bael,Bael,19,Large,Fiend,Devil,Archdevils,lawful evil,planar,18,189,3,,legendary,unique,Mordenkainen's Tome of Foes: 170
+,mtof.geryon,Geryon,22,Huge,Fiend,Devil,Archdevils,lawful evil,planar,19,300,3,lair,legendary,unique,Mordenkainen's Tome of Foes: 173
+,mtof.hutijin,Hutijin,21,Large,Fiend,Devil,Archdevils,lawful evil,planar,19,200,2,,legendary,unique,Mordenkainen's Tome of Foes: 175
+,mtof.moloch,Moloch,21,Large,Fiend,Devil,Archdevils,lawful evil,planar,19,253,4,,legendary,unique,Mordenkainen's Tome of Foes: 177
+,mtof.titivilus,Titivilus,16,Medium,Fiend,Devil,Archdevils,lawful evil,planar,20,127,6,,legendary,unique,Mordenkainen's Tome of Foes: 179
+,mtof.zariel,Zariel,21,Large,Fiend,Devil,Archdevils,lawful evil,planar,21,580,7,lair,legendary,unique,Mordenkainen's Tome of Foes: 180
+,mtof.drow-arachnomancer,Drow Arachnomancer,13,Medium,Humanoid,Elf,Drow,chaotic evil,"underground, urban",15,162,3,,,,Mordenkainen's Tome of Foes: 182
+,mtof.drow-favored-consort,Drow Favored Consort,18,Medium,Humanoid,Elf,Drow,chaotic evil,"underground, urban",15,225,5,,,,Mordenkainen's Tome of Foes: 183
+,mtof.drow-house-captain,Drow House Captain,9,Medium,Humanoid,Elf,Drow,chaotic evil,"underground, urban",16,162,4,,,,Mordenkainen's Tome of Foes: 184
+,mtof.drow-inquisitor,Drow Inquisitor,14,Medium,Humanoid,Elf,Drow,chaotic evil,"underground, urban",16,143,2,,,,Mordenkainen's Tome of Foes: 184
+,mtof.drow-matron-mother,Drow Matron Mother,20,Medium,Humanoid,Elf,Drow,chaotic evil,"underground, urban",17,262,4,,legendary,,Mordenkainen's Tome of Foes: 186
+,mtof.drow-shadowblade,Drow Shadowblade,11,Medium,Humanoid,Elf,Drow,chaotic evil,"underground, urban",17,150,5,,,,Mordenkainen's Tome of Foes: 187
+,mtof.duergar-despot,Duergar Despot,12,Medium,Humanoid,Dwarf,Duergar,lawful evil,"underground, urban",21,119,-3,,,,Mordenkainen's Tome of Foes: 188
+,mtof.duergar-hammerer,Duergar Hammerer,2,Medium,Construct,,Duergar,lawful evil,"underground, urban",17,33,-2,,,,Mordenkainen's Tome of Foes: 188
+,mtof.duergar-kavalrachni,Duergar Kavalrachni,2,Medium,Humanoid,Dwarf,Duergar,lawful evil,"underground, urban",16,26,0,,,,Mordenkainen's Tome of Foes: 189
+,mtof.duergar-mind-master,Duergar Mind Master,2,Medium,Humanoid,Dwarf,Duergar,lawful evil,"underground, urban",14,39,3,,,,Mordenkainen's Tome of Foes: 189
+,mtof.duergar-screamer,Duergar Screamer,3,Medium,Construct,,Duergar,lawful evil,"underground, urban",15,38,-2,,,,Mordenkainen's Tome of Foes: 190
+,mtof.duergar-soulblade,Duergar Soulblade,1,Medium,Humanoid,Dwarf,Duergar,lawful evil,"underground, urban",14,18,3,,,,Mordenkainen's Tome of Foes: 190
+,mtof.duergar-stone-guard,Duergar Stone Guard,2,Medium,Humanoid,Dwarf,Duergar,lawful evil,"underground, urban",18,39,0,,,,Mordenkainen's Tome of Foes: 191
+,mtof.duergar-warlord,Duergar Warlord,6,Medium,Humanoid,Dwarf,Duergar,lawful evil,"underground, urban",20,75,0,,,,Mordenkainen's Tome of Foes: 192
+,mtof.duergar-xarrorn,Duergar Xarrorn,2,Medium,Humanoid,Dwarf,Duergar,lawful evil,"underground, urban",18,26,0,,,,Mordenkainen's Tome of Foes: 193
+,mtof.eidolon,Eidolon,12,Medium,Undead,,,any,"dungeon, ruins",9,63,-1,,,,Mordenkainen's Tome of Foes: 194
+,mtof.sacred-statue,Sacred Statue,0,Large,Construct,,,any,"dungeon, ruins",19,95,-1,,,,Mordenkainen's Tome of Foes: 194
+,mtof.autumn-eladrin,Autumn Eladrin,10,Medium,Fey,Elf,Eladrin,chaotic neutral,planar,19,127,3,,,,Mordenkainen's Tome of Foes: 195
+,mtof.spring-eladrin,Spring Eladrin,10,Medium,Fey,Elf,Eladrin,chaotic neutral,planar,19,127,3,,,,Mordenkainen's Tome of Foes: 196
+,mtof.summer-eladrin,Summer Eladrin,10,Medium,Fey,Elf,Eladrin,chaotic neutral,planar,19,127,5,,,,Mordenkainen's Tome of Foes: 196
+,mtof.winter-eladrin,Winter Eladrin,10,Medium,Fey,Elf,Eladrin,chaotic neutral,planar,19,127,0,,,,Mordenkainen's Tome of Foes: 197
+,mtof.leviathan,Leviathan,20,Gargantuan,Elemental,,Elder Elementals,neutral,"aquatic, planar",17,328,7,,legendary,,Mordenkainen's Tome of Foes: 198
+,mtof.phoenix,Phoenix,16,Gargantuan,Elemental,,Elder Elementals,neutral,planar,18,175,8,,legendary,,Mordenkainen's Tome of Foes: 199
+,mtof.elder-tempest,Elder Tempest,19,Gargantuan,Elemental,,Elder Elementals,neutral,planar,19,264,9,,legendary,,Mordenkainen's Tome of Foes: 200
+,mtof.zaratan,Zaratan,21,Gargantuan,Elemental,,Elder Elementals,neutral,planar,21,307,0,,legendary,,Mordenkainen's Tome of Foes: 201
+,mtof.air-elemental-myrmidon,Air Elemental Myrmidon,7,Medium,Elemental,,Elder Myrmidons,neutral,planar,18,117,2,,,,Mordenkainen's Tome of Foes: 202
+,mtof.earth-elemental-myrmidon,Earth Elemental Myrmidon,7,Medium,Elemental,,Elder Myrmidons,neutral,planar,18,127,0,,,,Mordenkainen's Tome of Foes: 202
+,mtof.fire-elemental-myrmidon,Fire Elemental Myrmidon,7,Medium,Elemental,,Elder Myrmidons,neutral,planar,18,123,4,,,,Mordenkainen's Tome of Foes: 203
+,mtof.water-elemental-myrmidon,Water Elemental Myrmidon,7,Medium,Elemental,,Elder Myrmidons,neutral,"aquatic, planar",18,127,2,,,,Mordenkainen's Tome of Foes: 203
+,mtof.giff,Giff,3,Medium,Humanoid,,,lawful neutral,,16,60,2,,,,Mordenkainen's Tome of Foes: 204
+,mtof.githyanki-gish,Githyanki Gish,10,Medium,Humanoid,Gith,Gith,lawful evil,planar,17,123,2,,,,Mordenkainen's Tome of Foes: 205
+,mtof.githyanki-kithrak,Githyanki Kith'rak,12,Medium,Humanoid,Gith,Gith,lawful evil,planar,18,180,3,,,,Mordenkainen's Tome of Foes: 205
+,mtof.githyanki-supreme-commander,Githyanki Supreme Commander,14,Medium,Humanoid,Gith,Gith,lawful evil,planar,18,187,3,,legendary,,Mordenkainen's Tome of Foes: 206
+,mtof.githzerai-anarch,Githzerai Anarch,16,Medium,Humanoid,Gith,Gith,lawful evil,planar,20,144,5,,legendary,,Mordenkainen's Tome of Foes: 207
+,mtof.githzerai-enlightened,Githzerai Enlightened,10,Medium,Humanoid,Gith,Gith,lawful evil,planar,18,112,4,,,,Mordenkainen's Tome of Foes: 208
+,mtof.gray-render,Gray Render,12,Large,Monstrosity,,,chaotic neutral,urban,19,189,1,,,,Mordenkainen's Tome of Foes: 209
+,mtof.howler,Howler,8,Large,Fiend,,,chaotic evil,planar,16,90,3,,,,Mordenkainen's Tome of Foes: 210
+,mtof.young-kruthik,Young Kruthik,2018-01-08 00:00:00,Small,Monstrosity,,Kruthiks,unaligned,"cave, underground",16,9,3,,,,Mordenkainen's Tome of Foes: 211
+,mtof.adult-kruthik,Adult Kruthik,2,Medium,Monstrosity,,Kruthiks,unaligned,"cave, underground",18,39,3,,,,Mordenkainen's Tome of Foes: 212
+,mtof.kruthik-hive-lord,Kruthik Hive Lord,5,Large,Monstrosity,,Kruthiks,unaligned,"cave, underground",20,102,3,,,,Mordenkainen's Tome of Foes: 212
+,mtof.marut,Marut,25,Large,Construct,,,lawful neutral,planar,22,432,1,,,,Mordenkainen's Tome of Foes: 213
+,mtof.meazel,Meazel,1,Medium,Humanoid,Meazel,,neutral evil,"planar, underground",13,35,3,,,,Mordenkainen's Tome of Foes: 214
+,mtof.nagpa,Nagpa,17,Medium,Humanoid,Nagpa,,neutral evil,,19,187,2,,,,Mordenkainen's Tome of Foes: 215
+,mtof.nightwalker,Nightwalker,20,Huge,Undead,,,chaotic evil,planar,14,297,4,,,,Mordenkainen's Tome of Foes: 216
+,mtof.oblex-spawn,Oblex Spawn,2018-01-04 00:00:00,Tiny,Ooze,,Oblex,lawful evil,underground,13,18,3,,,,Mordenkainen's Tome of Foes: 217
+,mtof.adult-oblex,Adult Oblex,5,Medium,Ooze,,Oblex,lawful evil,underground,14,75,3,,,,Mordenkainen's Tome of Foes: 218
+,mtof.elder-oblex,Elder Oblex,10,Huge,Ooze,,Oblex,lawful evil,underground,16,115,3,,,,Mordenkainen's Tome of Foes: 219
+,mtof.ogre-battering-ram,Ogre Battering Ram,4,Large,Giant,,Ogres,chaotic evil,"dungeon, forest, mountain, swamp",14,59,-1,,,,Mordenkainen's Tome of Foes: 220
+,mtof.ogre-bolt-launcher,Ogre Bolt Launcher,2,Large,Giant,,Ogres,chaotic evil,"dungeon, forest, mountain, swamp",13,59,1,,,,Mordenkainen's Tome of Foes: 220
+,mtof.ogre-chain-brute,Ogre Chain Brute,3,Large,Giant,,Ogres,chaotic evil,"dungeon, forest, mountain, swamp",11,59,-1,,,,Mordenkainen's Tome of Foes: 221
+,mtof.ogre-howdah,Ogre Howdah,2,Large,Giant,,Ogres,chaotic evil,"dungeon, forest, mountain, swamp",13,59,-1,,,,Mordenkainen's Tome of Foes: 221
+,mtof.retriever,Retriever,14,Large,Construct,,,lawful evil,underground,19,210,3,,,,Mordenkainen's Tome of Foes: 222
+,mtof.frost-salamander,Frost Salamander,9,Huge,Elemental,,,unaligned,planar,17,168,1,,,,Mordenkainen's Tome of Foes: 223
+,mtof.gloom-weaver,Gloom Weaver,9,Medium,Humanoid,Elf,Shadar-kai,neutral,"planar, urban",14,104,4,,,,Mordenkainen's Tome of Foes: 224
+,mtof.shadow-dancer,Shadow Dancer,7,Medium,Humanoid,Elf,Shadar-kai,neutral,"planar, urban",15,71,3,,,,Mordenkainen's Tome of Foes: 225
+,mtof.soul-monger,Soul Monger,11,Medium,Humanoid,Elf,Shadar-kai,neutral,"planar, urban",15,123,3,,,,Mordenkainen's Tome of Foes: 226
+,mtof.skulk,Skulk,2018-01-02 00:00:00,Medium,Humanoid,,,chaotic neutral,planar,14,18,4,,,,Mordenkainen's Tome of Foes: 228
+,mtof.skull-lord,Skull Lord,15,Medium,Undead,,,lawful evil,"dungeon, ruins",18,105,3,,,,Mordenkainen's Tome of Foes: 230
+,mtof.the-angry,The Angry,13,Medium,Monstrosity,,Sorrowsworn,neutral evil,planar,18,255,0,,,,Mordenkainen's Tome of Foes: 231
+,mtof.the-hungry,The Hungry,11,Medium,Monstrosity,,Sorrowsworn,neutral evil,planar,17,225,0,,,,Mordenkainen's Tome of Foes: 232
+,mtof.the-lonely,The Lonely,9,Medium,Monstrosity,,Sorrowsworn,neutral evil,planar,16,112,1,,,,Mordenkainen's Tome of Foes: 232
+,mtof.the-lost,The Lost,7,Medium,Monstrosity,,Sorrowsworn,neutral evil,planar,15,78,1,,,,Mordenkainen's Tome of Foes: 233
+,mtof.the-wretched,The Wretched,2018-01-04 00:00:00,Small,Monstrosity,,Sorrowsworn,neutral evil,planar,15,10,1,,,,Mordenkainen's Tome of Foes: 233
+,mtof.star-spawn-grue,Star Spawn Grue,2018-01-04 00:00:00,Small,Aberration,,Star Spawn,neutral evil,planar,11,17,1,,,,Mordenkainen's Tome of Foes: 234
+,mtof.star-spawn-hulk,Star Spawn Hulk,10,Large,Aberration,,Star Spawn,chaotic evil,planar,16,136,-1,,,,Mordenkainen's Tome of Foes: 234
+,mtof.star-spawn-larva-mage,Star Spawn Larva Mage,16,Medium,Aberration,,Star Spawn,chaotic evil,planar,16,168,1,,,,Mordenkainen's Tome of Foes: 235
+,mtof.star-spawn-mangler,Star Spawn Mangler,5,Medium,Aberration,,Star Spawn,chaotic evil,planar,14,71,4,,,,Mordenkainen's Tome of Foes: 236
+,mtof.star-spawn-seer,Star Spawn Seer,13,Medium,Aberration,,Star Spawn,neutral evil,planar,17,153,1,,,,Mordenkainen's Tome of Foes: 236
+,mtof.female-steeder,Female Steeder,1,Large,Monstrosity,,Steeder,unaligned,"cave, underground",14,30,3,,,,Mordenkainen's Tome of Foes: 238
+,mtof.male-steeder,Male Steeder,2018-01-04 00:00:00,Medium,Monstrosity,,Steeder,unaligned,"cave, underground",12,13,1,,,,Mordenkainen's Tome of Foes: 238
+,mtof.steel-predator,Steel Predator,16,Large,Construct,,,lawful evil,planar,20,207,3,,,,Mordenkainen's Tome of Foes: 239
+,mtof.stone-cursed,Stone Cursed,1,Medium,Construct,,,lawful evil,dungeon,17,19,-3,,,,Mordenkainen's Tome of Foes: 240
+,mtof.sword-wraith-commander,Sword Wraith Commander,8,Medium,Undead,,Sword Wraith,lawful evil,ruins,18,127,2,,,,Mordenkainen's Tome of Foes: 241
+,mtof.sword-wraith-warrior,Sword Wraith Warrior,3,Medium,Undead,,Sword Wraith,lawful evil,ruins,16,45,1,,,,Mordenkainen's Tome of Foes: 241
+,mtof.tortle,Tortle,2018-01-04 00:00:00,Medium,Humanoid,Tortle,Tortles,lawful good,"coast, forest, grassland, mountain, swamp",17,22,0,,,,Mordenkainen's Tome of Foes: 242
+,mtof.tortle-druid,Tortle Druid,2,Medium,Humanoid,Tortle,Tortles,lawful neutral,"coast, forest, grassland, mountain, swamp",17,33,0,,,,Mordenkainen's Tome of Foes: 242
+,mtof.dire-troll,Dire Troll,13,Huge,Giant,,Trolls,chaotic evil,"dungeon, forest, mountain, ruins, swamp",15,172,2,,,,Mordenkainen's Tome of Foes: 243
+,mtof.rot-troll,Rot Troll,9,Large,Giant,,Trolls,chaotic evil,"dungeon, forest, mountain, ruins, swamp",16,138,1,,,,Mordenkainen's Tome of Foes: 244
+,mtof.spirit-troll,Spirit Troll,11,Large,Giant,,Trolls,chaotic evil,"dungeon, forest, mountain, ruins, swamp",17,97,3,,,,Mordenkainen's Tome of Foes: 244
+,mtof.venom-troll,Venom Troll,7,Large,Giant,,Trolls,chaotic evil,"dungeon, forest, mountain, ruins, swamp",15,94,1,,,,Mordenkainen's Tome of Foes: 245
+,mtof.vampiric-mist,Vampiric Mist,3,Medium,Undead,,,chaotic evil,,13,30,3,,,,Mordenkainen's Tome of Foes: 246
+,mtof.canoloth,Canoloth,8,Medium,Fiend,Yugoloth,Yugoloths,neutral evil,planar,16,120,0,,,,Mordenkainen's Tome of Foes: 247
+,mtof.dhergoloth,Dhergoloth,7,Medium,Fiend,Yugoloth,Yugoloths,neutral evil,planar,15,119,0,,,,Mordenkainen's Tome of Foes: 248
+,mtof.hydroloth,Hydroloth,9,Medium,Fiend,Yugoloth,Yugoloths,neutral evil,planar,15,135,5,,,,Mordenkainen's Tome of Foes: 249
+,mtof.merrenoloth,Merrenoloth,3,Medium,Fiend,Yugoloth,Yugoloths,neutral evil,planar,13,40,3,lair,,,Mordenkainen's Tome of Foes: 250
+,mtof.oinoloth,Oinoloth,12,Medium,Fiend,Yugoloth,Yugoloths,neutral evil,planar,17,126,3,,,,Mordenkainen's Tome of Foes: 251
+,mtof.yagnoloth,Yagnoloth,11,Large,Fiend,Yugoloth,Yugoloths,neutral evil,planar,17,147,2,,,,Mordenkainen's Tome of Foes: 252
