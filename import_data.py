@@ -7,13 +7,18 @@ pd.set_option('display.max_columns', None)
 
 
 loc = "kfc_monsters.xlsx"
+loc2 = "mtf_monsters.xlsx" #Mordakiens tome of foes data
+df_file2 = pd.read_excel(loc2)
 df_file = pd.read_excel(loc)
+#print(df_file2.head())
 #print(df_file.head())
 checker = "\n *** \n Testing \n *** \n"
 
 def data_tranformation():
+    df_csv_add = pd.read_excel(loc2)
     df_csv = pd.read_excel(loc)
-    df_csv.to_csv("kfc_monstercopy.csv", index=False)
+    result = df_csv.append(df_csv_add, sort=False)
+    result.to_csv("kfc_monstercopy.csv", index=False)
     #CSV files are easier to parse through, using resources available to me
 
 
@@ -35,7 +40,7 @@ def csv_cleaner():
         df = df.drop("sources", axis=1)
         df = df.dropna()
 
-        #print(df)
+        df.to_csv("cleaned_kfc_monstercopy.csv", index=False)
         return df
 
     except:
@@ -46,14 +51,18 @@ def csv_cleaner():
 def refine_sources(df):
     # Creating new column for page number
     splitcolumn = df["sources"].str.split(": ", n=1, expand=True)
+
     # print("Trying to output new column \n", splitcolumn, list(splitcolumn))
     clean_refined_sources(df, splitcolumn)
+    print(df)
     #print(list(df), df)
     select_sources = df["sources"].values
     select_sources = df.loc[df["sources"].values == 'monstermanual']
-    adder = df.loc[df["sources"].values == 'volosguidetomonsters']
+    adder, adder2 = df.loc[df["sources"].values == 'volosguidetomonsters'], df.loc[df["sources"].values == "mordenkainenstomeoffoes"]
+
     #Implement Mordakiens tomb of foes if data is accessable
     select_sources = select_sources.append(adder)
+    select_sources = select_sources.append(adder2)
     #print(checker, selectsources["sources"])
     return select_sources
 
@@ -66,12 +75,15 @@ def clean_refined_sources(df, splitcolumn):
     df["sources"] = df["sources"].str.replace("[^\w\s]", "")
     df["name"] = df["name"].str.replace(" ", "-")
     df["name"] = df["name"].str.replace("[^\w-]", "")
+
     df["sources"], df["name"] = [x.lower() for x in df["sources"]], [y.lower() for y in df["name"]]
     #Fixes issue with CR being converted to dates, should add preconditions in future
     df.loc[df["cr"].values == "2017-01-02 00:00:00", "cr"] = "0.5" #Typed as 1/2 CR
     df.loc[df["cr"].values == "2017-01-04 00:00:00", "cr"] = "0.25" #Typed as 1/4 CR
     df.loc[df["cr"].values == "2017-01-08 00:00:00", "cr"] = "0.125" #Typed as 1/8 CR
-    df["cr"] = df["cr"].apply(pd.to_numeric)
+
+    df["cr"] = df["cr"].apply(pd.to_numeric, errors="ignore")
+
     #print(df["cr"].unique())
     #print(df.loc[df["cr"] == "1/2"])
 
