@@ -41,7 +41,9 @@ def csv_cleaner():
         df = df.dropna()
 
         df.to_csv("cleaned_kfc_monstercopy.csv", index=False)
+        print(df["cr"])
         return df
+
 
     except:
         print("an error occured")
@@ -54,7 +56,7 @@ def refine_sources(df):
 
     # print("Trying to output new column \n", splitcolumn, list(splitcolumn))
     clean_refined_sources(df, splitcolumn)
-    print(df)
+    #print(df)
     #print(list(df), df)
     select_sources = df["sources"].values
     select_sources = df.loc[df["sources"].values == 'monstermanual']
@@ -81,8 +83,12 @@ def clean_refined_sources(df, splitcolumn):
     df.loc[df["cr"].values == "2017-01-02 00:00:00", "cr"] = "0.5" #Typed as 1/2 CR
     df.loc[df["cr"].values == "2017-01-04 00:00:00", "cr"] = "0.25" #Typed as 1/4 CR
     df.loc[df["cr"].values == "2017-01-08 00:00:00", "cr"] = "0.125" #Typed as 1/8 CR
+    df.loc[df["cr"].values == "2018-01-02 00:00:00", "cr"] = "0.5"
+    df.loc[df["cr"].values == "2018-01-04 00:00:00", "cr"] = "0.25"
+    df.loc[df["cr"].values == "2018-01-08 00:00:00", "cr"] = "0.125"
 
     df["cr"] = df["cr"].apply(pd.to_numeric, errors="ignore")
+
 
     #print(df["cr"].unique())
     #print(df.loc[df["cr"] == "1/2"])
