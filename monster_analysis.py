@@ -19,7 +19,9 @@ def find_average_cr():
     #print(checker, df_copy)
     #print("The mean value of the challenge rating is {0:.1f}".format(df_copy["cr"].mean()), divider)
     #print("The mode value of the challenge rating is {0:.1f}".format(int(df_copy["cr"].mode())))
-    return df_copy["cr"].mean()
+    out = round(df_copy["cr"].mean())
+    return out
+
 def find_quantile_cr():
     #Finds the average CR of each quantile, and outputs a CR average that fits into the "normal" range
     #Aka, between .25 and .75
@@ -62,7 +64,7 @@ def standard_dev_cr():
     #Hold the bottom mosnters to fight - print(df_out[df_out["cr"] < low_range_monsters].values)
     df_out = df_out.drop(df_out[df_out["cr"] > top_range_monsters].index)
     df_out = df_out.drop(df_out[df_out["cr"] < low_range_monsters].index)
-    #print(df_out)
+    print("Testing \n", df_out)
     return df_out
 
 
