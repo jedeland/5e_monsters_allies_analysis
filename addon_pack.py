@@ -2,29 +2,29 @@ import pandas as pd; import numpy as np; import monster_analysis
 import sqlalchemy as sql; import string; import import_data
 #Pandas and sqlalchemy have to be initialised with the terminal, use pip install x to do so
 
+
+# This list of damage types was taken from https://www.reddit.com/r/dndnext/comments/9w5ho5/im_compiling_a_list_of_all_sources_of_resistance/
+# Kudos to u/LyschkoPlon for creating it
+dnd_5e_damage = ["Poison", "Fire", "Psychic", "Necrotic", "Cold", "Acid", "Piercing", "Slashing", "Bludgeoning",
+                 "Magical (Weapon)", "Magical (Spell)", "Thunder", "Lightning", "Radiant", "Force",
+                 "Weapon (Ranged)", "Weapon (Melee)"]
+# These damage types should not appear on the same monster
+non_compat_damage = {"Fire": "Cold", "Bludgeoning": "Piercing", "Necrotic": "Radiant",
+                     "Cold": "Fire", "Piercing": "Bludgeoning", "Radiant": "Necrotic"}
+
+
 def witcherify_monster():
-    vulnerabilities = []
-    resistance = []
-    invulnerability = []
+
     df_copy = monster_analysis.standard_dev_cr()
-
-    #This list of damage types was taken from https://www.reddit.com/r/dndnext/comments/9w5ho5/im_compiling_a_list_of_all_sources_of_resistance/
-    #Kudos to u/LyschkoPlon for creating it
-    dnd_5e_damage = ["Poison", "Fire", "Psychic", "Necrotic", "Cold", "Acid", "Piercing", "Slashing", "Bludgeoning",
-                    "Magical (Weapon)", "Magical (Spell)", "Thunder", "Lightning", "Radiant", "Force",
-                     "Weapon (Ranged)", "Weapon (Melee)"]
-    #These damage types should not appear on the same monster
-    non_compat_damage = {"Fire": "Cold", "Bludgeoning": "Piercing", "Necrotic": "Radiant",
-                         "Cold": "Fire", "Piercing": "Bludgeoning", "Radiant": "Necrotic"}
-    #Lures needs to be improved, or can be added by the user using line interface
-    #Lures could use creature types instead of names, to generalise the output
-    lures = ["The creature is attracted to the scent of {} meat".format(df_copy["type"].sample().values),
-             "The creature is attracted to the scent of {} meat".format(df_copy["name"].sample().values)]
-
     print("This function witcherifies a monster, using the rules proscribed in this video\n",
           "https://youtu.be/GhjkPv4qo5w\n"
            )
     group_in = input("Please type the size of the group: ")
+
+    # Lures needs to be improved, or can be added by the user using line interface, also needs to be made global
+    # Lures could use creature types instead of names, to generalise the output
+    lures = ["The creature is attracted to the scent of {} meat".format(df_copy["type"].sample().values),
+         "The creature is attracted to the scent of {} meat".format(df_copy["name"].sample().values)]
 
     if group_in.isdigit() and group_in != "1":
         print("Please type in the levels of the group")
@@ -38,8 +38,9 @@ def witcherify_monster():
         print("Your group is made up of players that are levels : ", level_inputs,
               "\nThat means the average level is {}".format(average_lvl),
               "\nThe witcherified monster should be CR: {}".format(cr_out))
-        monster = refine_monster(cr_out) #Continue after function is completed
-        mutate_monster(monster)
+        #Outputs a single monster that has been selected using the console (out of 3)
+        monster = refine_monster(cr_out)
+        witcher_monster = mutate_monster(monster)
 
     else:
         print("This is an invalid input, please ensure the input is numeric and above 1")
@@ -47,6 +48,10 @@ def witcherify_monster():
 
 
 def mutate_monster(monster):
+    #Take the monster that you chose, and half their HP
+    vulnerabilities = []
+    resistance = []
+    invulnerability = []
     monster["hp"] = int(monster["hp"]) / 2
     num_immunity = round(int(monster["cr"]) / 3)
     num_resistance = None
@@ -61,9 +66,37 @@ def mutate_monster(monster):
         "Because of the creatures strength, mutation or otherwise ungodly powers, it has gained {0} immunities and {1} resistances!".
         format(num_immunity, num_resistance))
     print("In addition, the monster has become vulnerable to {} types of damage".format(num_vulnerabilites))
-    print(monster.values)
-    monster_dict = monster.to_dict()
-    print(monster_dict.get("name"))
+    #for loops that add the resis, invun, and vulner
+    dmg_reduced = dnd_5e_damage
+    for i in range(num_resistance):
+        x = np.random.randint(0, len(dmg_reduced) -1)
+        resistance_type = dmg_reduced[x]
+        dmg_reduced.pop(x)
+        if resistance_type not in resistance:
+            resistance.append(resistance_type)
+    for i in range(num_vulnerabilites):
+        x = np.random.randint(0, len(dmg_reduced) -1)
+        vulnerability_type = dmg_reduced[x]
+        dmg_reduced.pop(x)
+        if vulnerability_type not in resistance or vulnerabilities:
+            vulnerabilities.append(vulnerability_type)
+    for i in range(num_immunity):
+        x = np.random.randint(0, len(dmg_reduced) -1)
+        invulnerability_type = dmg_reduced[x]
+        dmg_reduced.pop(x)
+        if invulnerability_type not in resistance or vulnerabilities or invulnerability:
+            invulnerability.append(invulnerability_type)
+
+
+
+
+
+    print("The mutated {0} - has become resistance to the following types of damage\n{1}\nAnd has become immune to the following types of damage {2}"
+    "\nAnd has become vulnerable to the following types of damage {3}".format(monster["name"].values, resistance, invulnerability, vulnerabilities))
+    monster["resistance"] = pd.Series([resistance])
+    monster["invulnerability"] = pd.Series([invulnerability])
+    monster["vulnerabilities"] = pd.Series([vulnerabilities])
+    return monster
 
 
 def refine_monster(cr_in):
