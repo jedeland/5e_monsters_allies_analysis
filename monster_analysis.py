@@ -12,6 +12,15 @@ divider = "\n***\n***\n"
 question = "Type 1 for yes, or 2 for no"
 #Could create global variable to implement the DataFrame, but using local variables to return particular outputs
 #For future use with the interface file
+#Should redesign functions to be modular and callable using the cleaned DF or a global variable, see below example
+#When implementing the interface file
+#df_global = import_data.csv_cleaner()
+#def find_average_cr(df_input):
+    #Finds average CR, may need to convert CR column to int/double for this
+    #df_copy = df_input
+    #out = round(df_copy["cr"].mean())
+    #print(out)
+    #return out
 
 def find_average_cr():
     #Finds average CR, may need to convert CR column to int/double for this
@@ -30,6 +39,29 @@ def find_quantile_cr():
     print("The first quantile of the CR is {}".format(df_copy["cr"].quantile(.25)),
           "The second quantile of the CR is {}".format(df_copy["cr"].quantile(.50)),
           "The third quantile of the CR is {}".format(df_copy["cr"].quantile(.75)))
+
+def find_types_of_monster():
+    df_copy = import_data.csv_cleaner()
+    #Creating seperate dataframes using user input
+    types = df_copy["type"].unique()
+    print("Type the number of the type of monster you would like to search through")
+    for i in range(len(types)-1):
+        print("{0}: {1}".format(i, types[i]))
+    user_input = input("Number: ")
+    if user_input.isdigit() and int(user_input) < 13:
+        print("Ok: Printing a Dataframe of this type of monster, along with some information")
+        #Dataframe should be able to call different functions to create a wider picture of the DF
+        monster_type_df = df_copy[df_copy["type"].values == types[int(user_input)]]
+        num_monsters = len(monster_type_df)
+        cr_avrg = round(monster_type_df["cr"].mean())
+        deadliest = monster_type_df.loc[monster_type_df["cr"].values == monster_type_df["cr"].max()]
+        weakest = monster_type_df[monster_type_df["cr"].values == monster_type_df["cr"].min()]
+        print("The DataFrame contains {0} monsters\nThe Average Cr is {1}\nThe Deadliest monster is the {2}\nThe Weakest monster is the {3}\n"
+              .format(num_monsters, cr_avrg, deadliest["name"].values, weakest["name"].values), monster_type_df)
+
+
+
+find_types_of_monster()
 
 def iqr_monster_cr():
     df_copy = import_data.csv_cleaner()
@@ -64,8 +96,8 @@ def standard_dev_cr():
     #Hold the bottom mosnters to fight - print(df_out[df_out["cr"] < low_range_monsters].values)
     df_out = df_out.drop(df_out[df_out["cr"] > top_range_monsters].index)
     df_out = df_out.drop(df_out[df_out["cr"] < low_range_monsters].index)
-    print("Testing \n", df_out)
+    #print("Testing \n", df_out)
     return df_out
 
-
+find_average_cr()
 standard_dev_cr()
