@@ -59,9 +59,9 @@ def find_types_of_monster():
         print("The DataFrame contains {0} monsters\nThe Average Cr is {1}\nThe Deadliest monster is the {2}\nThe Weakest monster is the {3}\n"
               .format(num_monsters, cr_avrg, deadliest["name"].values, weakest["name"].values), monster_type_df)
 
-
-
-find_types_of_monster()
+def general_info_monsters():
+    df_copy = import_data.csv_cleaner()
+    print("Printing out basic information about the Dataframe\n", df_copy.describe().transpose())
 
 def iqr_monster_cr():
     df_copy = import_data.csv_cleaner()
