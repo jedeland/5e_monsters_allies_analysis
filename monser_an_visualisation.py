@@ -15,9 +15,17 @@ def plot_cr_box():
 def plot_cr_line():
     df_copy = monster_analysis.ranked_by_cr()
     print(df_copy.columns)
-    names = df_copy["name"]
-    crs = df_copy["cr"]
-    plt.plot(names, crs)
+    df_copy = df_copy.drop(columns=["rankedcr", "init", "hp"])
+    ticks = df_copy["cr"].unique()
+    
+    ticks.sort()
+    print(ticks)
+    ax = df_copy.plot.hist(bins=100)
+
+    plt.setp(ax.get_xticklabels(), horizontalalignment='right')
+    plt.xticks(ticks)
+    ax.set_xticks(ax.get_xticks()[::2])
+
     plt.show()
 
 plot_cr_line()
