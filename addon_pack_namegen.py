@@ -1,4 +1,8 @@
-import pandas as pd; import numpy as np; import monster_analysis
+import pandas as pd; import numpy as np;
+import requests
+from bs4 import BeautifulSoup
+
+import monster_analysis
 import sqlalchemy as sql; import string; import import_data
 
 #This addon pack focuses on the application of current and historic data to create more organic naming conventions for NPC's
@@ -30,8 +34,20 @@ def npc_scandi_male():
     print(df.columns)
     print(df)
 
-def german_first_names(): #This function is a test case of reading a wikipedia list to source names
-    tables = pd.read_html('https://en.wiktionary.org/wiki/Appendix:German_given_names')
-    print(tables)
+def german_first_names(): #This function is a test case of reading a wikipedia list to source names, with the names being loaded in DL elements (descriptive lists)
+    letters = list(string.ascii_uppercase)
+    table = pd.DataFrame(columns=letters)
+
+    file = requests.get("https://en.wiktionary.org/wiki/Appendix:German_given_names")
+    soup = BeautifulSoup(file.content, "html.parser")
+    rec_data = soup.find_all("dd")
+    for item in rec_data:
+        if item.string[0] in table.index:
+            table.append(item.string)
+
+        print(item.string)
+
+
+    print(table)
 
 german_first_names()
