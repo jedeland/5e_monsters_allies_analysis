@@ -36,18 +36,24 @@ def npc_scandi_male():
 
 def german_first_names(): #This function is a test case of reading a wikipedia list to source names, with the names being loaded in DL elements (descriptive lists)
     letters = list(string.ascii_uppercase)
-    table = pd.DataFrame(columns=letters)
+    df = pd.DataFrame(columns=letters)
 
     file = requests.get("https://en.wiktionary.org/wiki/Appendix:German_given_names")
     soup = BeautifulSoup(file.content, "html.parser")
     rec_data = soup.find_all("dd")
     for item in rec_data:
-        if item.string[0] in table.index:
-            table.append(item.string)
+        if item.string is not None:
+            adder = str(item.string)
+            print(item.string)
+            if item.string[0] in list(df.columns.values):
+                df = df.append({item.string[0]:adder}, ignore_index=True)
+            else:
+                pass
+    df_no_non = df.fillna(0)
+    print(df_no_non)
+    df_complete = df_no_non[df_no_non.values != 0]
 
-        print(item.string)
 
-
-    print(table)
+    print(df_complete)
 
 german_first_names()
