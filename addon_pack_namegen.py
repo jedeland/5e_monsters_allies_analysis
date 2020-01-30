@@ -4,9 +4,9 @@ import sqlalchemy as sql; import string; import import_data
 #This addon pack focuses on the application of current and historic data to create more organic naming conventions for NPC's
 #The following dataset will act as an anchor for this https://www.ssb.no/en/navn#renderAjaxBanner
 #https://www.europeandataportal.eu/data/datasets?locale=en&tags=vornamen&keywords=vornamen
-#https://www.europeandataportal.eu/data/datasets?locale=en
+#Changed idea to read wikipedia pages eg. https://en.wikipedia.org/w/index.php?title=Category:German-language_surnames&pagefrom=Eschenbach%0AEschenbach+%28surname%29#mw-pages
 #https://archaeologydataservice.ac.uk/archives/view/atlas_ahrb_2005/datasets.cfm?CFID=331341&CFTOKEN=70517262
-#Information taken from https://www.europeandataportal.eu under the Creative Commons Share-Alike Attribution Licence (CC-BY-SA).
+#Any information taken from https://www.europeandataportal.eu is being used under the Creative Commons Share-Alike Attribution Licence (CC-BY-SA).
 #Arcane name set seems like a useful idea, see text below
 '''
 Courtesy of u/Alazypanda -
@@ -30,4 +30,8 @@ def npc_scandi_male():
     print(df.columns)
     print(df)
 
-npc_scandi_male()
+def german_first_names(): #This function is a test case of reading a wikipedia list to source names
+    tables = pd.read_html('https://en.wiktionary.org/wiki/Appendix:German_given_names')
+    print(tables)
+
+german_first_names()
