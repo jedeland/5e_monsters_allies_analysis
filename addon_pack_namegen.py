@@ -43,14 +43,15 @@ def german_first_names(): #This function is a test case of reading a wikipedia l
     rec_data = soup.find_all("dd")
     name_divided = False
     for item in rec_data:
+        if item.string == "Aaltje":
+                name_divided = True
         if item.string is not None:
             adder = str(item.string)
             print(item.string)
-            if adder == "Aaltje":
-                name_divided = True
-            if item.string[0] in list(df.columns.values) and name_divided == False:
+
+            if not name_divided:
                 df = df.append({"Male":adder}, ignore_index=True)
-            elif item.string[0] in list(df.columns.values) and name_divided == True:
+            elif name_divided:
                 df = df.append({"Female":adder}, ignore_index=True)
                 pass
     df_no_non = df.fillna(0)
