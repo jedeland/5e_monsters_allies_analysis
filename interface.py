@@ -17,13 +17,14 @@ def start():
     for i in range(len(actions_dict.keys()) + 1):
         x = i + 1
         print("{0}: {1}".format(x, keys[i]))
-    while not finished:
+    while finished != True:
         user_in = input("")
-        if user_in == "1" or 1:
+        if user_in == "1":
             analysis_options()
-        elif user_in == "2" or 2:
+        elif user_in == "2":
             visualisation_options()
-        elif user_in == "3" or 3:
+        elif user_in == "3":
+            print("Quitting")
             finished = True
         else:
             print("That is not a valid input, Try again:\n")
@@ -34,9 +35,13 @@ def analysis_options():
     for i in range(len(analysis_list)):
         x = i + 1
         print("{0}: {1}".format(x, analysis_list[i]))
+    print("Please type the action you wish to take:")
+    user_in = input("")
     analysis_dict = {"1":find_average_cr(), "2":find_quantile_cr(), "3":find_types_of_monster()
                      ,"4":general_info_monsters(),"5":iqr_monster_cr(),"6":ranked_by_cr()
                      ,"7":standard_dev_cr(),"8":True}
+    action = analysis_dict.get(user_in)
+
 
 
 def visualisation_options():
