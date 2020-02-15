@@ -1,5 +1,5 @@
 import pandas as pd; import numpy as np;
-import sqlalchemy as sql; import string; import import_data
+import sqlalchemy as sql; import string; import import_data; import tensorflow as tf
 #Pandas and sqlalchemy have to be initialised with the terminal, use pip install x to do so
 
 '''
@@ -83,6 +83,7 @@ def ranked_by_cr():
     df_copy["rankedcr"] = df_copy["cr"].rank(ascending=1)
     print(divider, "The least challenging monsters are \n", df_copy[df_copy["rankedcr"] < 40].sort_values("rankedcr"))
     print(divider, "The most challenging monsters are \n", df_copy[df_copy["rankedcr"] > 330].sort_values("rankedcr"))
+    return df_copy
 
 def standard_dev_cr():
     df_copy = import_data.csv_cleaner()

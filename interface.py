@@ -41,6 +41,7 @@ def analysis_options():
                      ,"4":general_info_monsters(),"5":iqr_monster_cr(),"6":ranked_by_cr()
                      ,"7":standard_dev_cr(),"8":True}
     action = analysis_dict.get(user_in)
+    print(action)
 
 
 

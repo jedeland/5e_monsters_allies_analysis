@@ -41,7 +41,7 @@ def csv_cleaner():
         df = df.dropna()
 
         df.to_csv("cleaned_kfc_monstercopy.csv", index=False)
-        print(df["cr"])
+        #print(df["cr"])
         return df
 
 

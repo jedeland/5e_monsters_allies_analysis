@@ -16,15 +16,16 @@ non_compat_damage = {"Fire": "Cold", "Bludgeoning": "Piercing", "Necrotic": "Rad
 def witcherify_monster():
 
     df_copy = monster_analysis.standard_dev_cr()
-    print("This function witcherifies a monster, using the rules proscribed in this video\n",
-          "https://youtu.be/GhjkPv4qo5w\n"
-           )
-    group_in = input("Please type the size of the group: ")
 
     # Lures needs to be improved, or can be added by the user using line interface, also needs to be made global
     # Lures could use creature types instead of names, to generalise the output
     lures = ["The creature is attracted to the scent of {} meat".format(df_copy["type"].sample().values),
          "The creature is attracted to the scent of {} meat".format(df_copy["name"].sample().values)]
+
+    print("This function witcherifies a monster, using the rules proscribed in this video\n",
+          "https://youtu.be/GhjkPv4qo5w\n"
+           )
+    group_in = input("Please type the size of the group: ")
 
     if group_in.isdigit() and group_in != "1" and int(group_in) <= 15:
         print("Please type in the levels of the group")

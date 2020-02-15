@@ -17,7 +17,7 @@ def plot_cr_line():
     print(df_copy.columns)
     df_copy = df_copy.drop(columns=["rankedcr", "init", "hp"])
     ticks = df_copy["cr"].unique()
-    
+
     ticks.sort()
     print(ticks)
     ax = df_copy.plot.hist(bins=100)
