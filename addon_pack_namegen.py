@@ -36,7 +36,7 @@ def npc_scandi_male():
 
 def german_first_names(): #This function is a test case of reading a wikipedia list to source names, with the names being loaded in DL elements (descriptive lists)
     #letters = list(string.ascii_uppercase)
-    df = pd.DataFrame(columns=["Male","Female"])
+    df = pd.DataFrame(columns=["name","tag"])
 
     file = requests.get("https://en.wiktionary.org/wiki/Appendix:German_given_names")
     soup = BeautifulSoup(file.content, "html.parser")
@@ -50,9 +50,9 @@ def german_first_names(): #This function is a test case of reading a wikipedia l
             print(item.string)
 
             if not name_divided:
-                df = df.append({"Male":adder}, ignore_index=True)
+                df = df.append({"name":adder, "tag":"M"}, ignore_index=True)
             elif name_divided:
-                df = df.append({"Female":adder}, ignore_index=True)
+                df = df.append({"name":adder, "tag":"F"}, ignore_index=True)
                 pass
     df_no_non = df.fillna(0)
     print(df_no_non)
