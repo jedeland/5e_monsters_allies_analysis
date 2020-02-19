@@ -36,7 +36,7 @@ def npc_scandi_male():
 
 def german_first_names(): #This function is a test case of reading a wikipedia list to source names, with the names being loaded in DL elements (descriptive lists)
     #letters = list(string.ascii_uppercase)#
-    if os.path.exists("npcsx.csv"):
+    if os.path.exists("npcs.csv"):
         df = pd.read_csv("npcs.csv")
         df = df[df["origin"] == "GER"]
         print(df)
