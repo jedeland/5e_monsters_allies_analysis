@@ -1,5 +1,5 @@
 import pandas as pd; import numpy as np;
-import requests
+import requests; import os.path
 from bs4 import BeautifulSoup
 
 import monster_analysis
@@ -35,30 +35,42 @@ def npc_scandi_male():
     print(df)
 
 def german_first_names(): #This function is a test case of reading a wikipedia list to source names, with the names being loaded in DL elements (descriptive lists)
-    #letters = list(string.ascii_uppercase)
-    df = pd.DataFrame(columns=["name","tag"])
+    #letters = list(string.ascii_uppercase)#
+    if os.path.exists("npcsx.csv"):
+        df = pd.read_csv("npcs.csv")
+        df = df[df["origin"] == "GER"]
+        print(df)
+        return df
+    else:
 
-    file = requests.get("https://en.wiktionary.org/wiki/Appendix:German_given_names")
-    soup = BeautifulSoup(file.content, "html.parser")
-    rec_data = soup.find_all("dd")
-    name_divided = False
-    for item in rec_data:
-        if item.string == "Aaltje":
+        df = pd.DataFrame(columns=["name","tag", "origin"])
+
+        file = requests.get("https://en.wiktionary.org/wiki/Appendix:German_given_names")
+        soup = BeautifulSoup(file.content, "html.parser")
+        rec_data = soup.find_all("dd")
+        name_divided = False
+        for item in rec_data:
+            if item.string == "Aaltje":
                 name_divided = True
-        if item.string is not None:
-            adder = str(item.string)
-            print(item.string)
+            if item.string is not None:
+                adder = str(item.string)
+                print(item.string)
 
-            if not name_divided:
-                df = df.append({"name":adder, "tag":"M"}, ignore_index=True)
-            elif name_divided:
-                df = df.append({"name":adder, "tag":"F"}, ignore_index=True)
-                pass
+                if not name_divided:
+                    df = df.append({"name":adder, "tag":"M", "origin":"GER"}, ignore_index=True)
+                elif name_divided:
+                    df = df.append({"name":adder, "tag":"F", "origin":"GER"}, ignore_index=True)
+                    pass
     df_no_non = df.fillna(0)
     print(df_no_non)
     df_complete = df_no_non[df_no_non.values != 0]
-
-
     print(df_complete)
+    return df_complete
 
-german_first_names()
+def form_npc_csv():
+    #There is a strong argument to make this into an SQL file aswell, but for now CSV will do
+    df_copy = german_first_names()
+    df_copy.to_csv("npcs.csv", index=False)
+
+
+form_npc_csv()
