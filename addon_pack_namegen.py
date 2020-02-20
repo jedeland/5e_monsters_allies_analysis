@@ -67,6 +67,12 @@ def german_first_names(): #This function is a test case of reading a wikipedia l
     print(df_complete)
     return df_complete
 
+def german_surnames():
+    df = pd.DataFrame(columns=["surname"])
+    file = requests.get("https://en.wiktionary.org/wiki/Appendix:German_surnames")
+    soup = BeautifulSoup(file.content, "html.parser")
+    rec_data = soup.find_all()
+
 def form_npc_csv():
     #There is a strong argument to make this into an SQL file aswell, but for now CSV will do
     df_copy = german_first_names()
