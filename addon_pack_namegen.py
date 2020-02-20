@@ -73,15 +73,16 @@ def german_surnames():
     soup = BeautifulSoup(file.content, "html.parser")
     rec_data = soup.find_all("li")
     for item in rec_data:
-        if item.string == "Zweig":
-            adder = str(item.string)
-            df = df.append({"surname": adder}, ignore_index=True)
+        if item.string == "German family name etymology":
             break
         if item.string is not None:
             adder = str(item.string)
+            if "(disambiguation)" in adder:
+                adder.replace("(disambiguation)", "")
             print(adder)
             df = df.append({"surname": adder}, ignore_index=True)
-    print(df)
+    df["surname"] = df["surname"].str.replace("[^\w\s]", "")
+    print(df.tail(10))
     return df
 
 def form_npc_csv():
