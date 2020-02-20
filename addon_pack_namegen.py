@@ -54,7 +54,7 @@ def german_first_names(): #This function is a test case of reading a wikipedia l
                 name_divided = True
             if item.string is not None:
                 adder = str(item.string)
-                print(item.string)
+                print(adder)
 
                 if not name_divided:
                     df = df.append({"name":adder, "tag":"M", "origin":"GER"}, ignore_index=True)
@@ -71,7 +71,18 @@ def german_surnames():
     df = pd.DataFrame(columns=["surname"])
     file = requests.get("https://en.wiktionary.org/wiki/Appendix:German_surnames")
     soup = BeautifulSoup(file.content, "html.parser")
-    rec_data = soup.find_all()
+    rec_data = soup.find_all("li")
+    for item in rec_data:
+        if item.string == "Zweig":
+            adder = str(item.string)
+            df = df.append({"surname": adder}, ignore_index=True)
+            break
+        if item.string is not None:
+            adder = str(item.string)
+            print(adder)
+            df = df.append({"surname": adder}, ignore_index=True)
+    print(df)
+    return df
 
 def form_npc_csv():
     #There is a strong argument to make this into an SQL file aswell, but for now CSV will do
@@ -79,4 +90,4 @@ def form_npc_csv():
     df_copy.to_csv("npcs.csv", index=False)
 
 
-form_npc_csv()
+german_surnames()
