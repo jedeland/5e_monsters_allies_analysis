@@ -87,8 +87,12 @@ def german_surnames():
 
 def form_npc_csv():
     #There is a strong argument to make this into an SQL file aswell, but for now CSV will do
+    available_df = {1:german_first_names(), 2:german_surnames()}
     df_copy = german_first_names()
+    df_copy_extra = german_surnames()
+    df_copy = df_copy.merge([df_copy, df_copy_extra], how="outer", sort=True)
+    print(df_copy)
     df_copy.to_csv("npcs.csv", index=False)
 
 
-german_surnames()
+form_npc_csv()
