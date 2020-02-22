@@ -90,7 +90,7 @@ def form_npc_csv():
     available_df = {1:german_first_names(), 2:german_surnames()}
     df_copy = german_first_names()
     df_copy_extra = german_surnames()
-    df_copy = df_copy.merge([df_copy, df_copy_extra], how="outer", sort=True)
+    df_copy = df_copy.merge(df_copy_extra,how="outer")
     print(df_copy)
     df_copy.to_csv("npcs.csv", index=False)
 
