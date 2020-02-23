@@ -34,9 +34,9 @@ def npc_scandi_male():
     print(df.columns)
     print(df)
 
-def german_first_names(): #This function is a test case of reading a wikipedia list to source names, with the names being loaded in DL elements (descriptive lists)
+def german_names(): #This function is a test case of reading a wikipedia list to source names, with the names being loaded in DL elements (descriptive lists)
     #letters = list(string.ascii_uppercase)#
-    if os.path.exists("npcs.csv"):
+    if os.path.exists("npcsx.csv"):
         df = pd.read_csv("npcs.csv")
         df = df[df["origin"] == "GER"]
         print(df)
@@ -54,43 +54,48 @@ def german_first_names(): #This function is a test case of reading a wikipedia l
                 name_divided = True
             if item.string is not None:
                 adder = str(item.string)
-                print(adder)
+
 
                 if not name_divided:
                     df = df.append({"name":adder, "tag":"M", "origin":"GER"}, ignore_index=True)
                 elif name_divided:
                     df = df.append({"name":adder, "tag":"F", "origin":"GER"}, ignore_index=True)
                     pass
+    df = german_surnames(df)
+
     df_no_non = df.fillna(0)
+
     print(df_no_non)
+    #df_no_non = df_no_non.drop_duplicates(subset="name", keep=False, inplace=True)
     df_complete = df_no_non[df_no_non.values != 0]
+
     print(df_complete)
     return df_complete
 
-def german_surnames():
-    df = pd.DataFrame(columns=["surname"])
+def german_surnames(dataframe):
     file = requests.get("https://en.wiktionary.org/wiki/Appendix:German_surnames")
     soup = BeautifulSoup(file.content, "html.parser")
     rec_data = soup.find_all("li")
     for item in rec_data:
-        if item.string == "German family name etymology":
+        if item.string == "German family name etymology":#This is the final part of the page, is used to exit loop
             break
         if item.string is not None:
             adder = str(item.string)
             if "(disambiguation)" in adder:
                 adder.replace("(disambiguation)", "")
             print(adder)
-            df = df.append({"surname": adder}, ignore_index=True)
-    df["surname"] = df["surname"].str.replace("[^\w\s]", "")
-    print(df.tail(10))
-    return df
+            dataframe = dataframe.append({"name": adder, "tag":"S", "origin":"GER"}, ignore_index=True) #S tag is indicative of the surname
+    dataframe["name"] = dataframe["name"].str.replace("[^\w\s]", "")
+    print(dataframe.tail(10))
+    return dataframe
 
 def form_npc_csv():
     #There is a strong argument to make this into an SQL file aswell, but for now CSV will do
-    available_df = {1:german_first_names(), 2:german_surnames()}
-    df_copy = german_first_names()
-    df_copy_extra = german_surnames()
-    df_copy = df_copy.merge(df_copy_extra,how="outer")
+    available_df = {1:german_names(), 2:german_surnames(german_names())}
+    df_copy = german_names()
+    df_copy.drop_duplicates(["name"], keep="last")
+
+
     print(df_copy)
     df_copy.to_csv("npcs.csv", index=False)
 
