@@ -1,5 +1,5 @@
 import pandas as pd; import numpy as np;
-import requests; import os.path
+import requests; import os.path; import re
 from bs4 import BeautifulSoup
 '''
 This section of the monster analysis pack focused on using the NLTK (or similar tools) to analyse
@@ -24,7 +24,12 @@ def read_blogs():
         for item in read_data:
             b = b + 1
             x = b
-            print(x, item.p, "\n", item.a)
+            #print(x, item.p, "\n", item.a)
+            if item.a is not None:
+                print(item.a.get("href"))
+
+
+
 
 
 
