@@ -13,15 +13,19 @@ def read_blogs():
         page_urls.append("cr-{}".format(i+1))
     print(page_urls)
 
-    for i in range(len(page_urls)):
+    for i in range(len(page_urls)-15): #Is currently set to the first 6 entries for levities sake
         address = "http://themonstersknow.com/tag/{}/".format(page_urls[i])
         file = requests.get(address)
         print(address)
         soup = BeautifulSoup(file.content, "html.parser")
         read_data = soup.find_all("div", class_="entry-content")
-        print(read_data)
+        #Needs to follow link found in <a > tag, so that complete page is shown
+        b = 0 #Crude Iterator
         for item in read_data:
-            print(item)
+            b = b + 1
+            x = b
+            print(x, item.p, "\n", item.a)
+
 
 
 
