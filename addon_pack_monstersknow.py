@@ -26,7 +26,9 @@ def read_blogs():
             b = b + 1; x = b
             print(x, item.get_text(), "\n ", item.a)
             if item.a is None:
-                entry_dict[str(item.strong.text)] =  str(item.get_text()) #This should make keys and values that work without the need to manually assign them
+                text_entry = item.get_text()
+                text_entry = text_entry.replace("\n", "")
+                entry_dict[str(item.strong.text)] =  text_entry #This should make keys and values that work without the need to manually assign them
 
             elif item.a is not None:
                 print(item.a.get("href"))
@@ -40,10 +42,16 @@ def read_blogs():
     url_list = list(dict.fromkeys(url_list))
     print("Testing: {}".format(url_list), "\n ")
     print("formed dictionary of articles ", entry_dict.keys())
-    data = {"Article": [entry_dict.keys()], "Text": [entry_dict.values()]}
-    print(entry_dict.values())
-    df_mk = pd.DataFrame.from_dict(data)
+    df = form_df(entry_dict)
+
+
+def form_df(entry_dict):
+    df_mk = pd.DataFrame(columns=["article_id", "text"])
+    for k, v in entry_dict.items():
+        print(k, "is the key for: ", v)
+        df_mk = df_mk.append({"article_id": k, "text": v}, ignore_index=True)
     print(df_mk)
+    return df_mk
 
 
 def read_sublinks(func_list, entry_dict):
@@ -57,7 +65,9 @@ def read_sublinks(func_list, entry_dict):
             print(title.string)
             read_data = soup.find_all("div", class_="entry-content")
             for item in read_data:
-                entry_dict[title.string] = item.get_text()
+                text_entry = item.get_text()
+                text_entry = text_entry.replace("\n", "")
+                entry_dict[title.string] = text_entry
         else:
             print("invalid url")
             pass
