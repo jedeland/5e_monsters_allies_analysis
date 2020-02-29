@@ -9,7 +9,7 @@ This can be done by using beautiful soup to scrape information from each article
 
 def read_blogs():
     page_urls = ["cr-1-4", "cr-1-2"]
-    func_list, entry_dict = [], {} #list will be passed to another function to read sub pages
+    url_list, entry_dict = [], {} #list will be passed to another function to read sub pages
     for i in range(21):
         page_urls.append("cr-{}".format(i+1)) #Automating target pages
     print(page_urls)
@@ -26,14 +26,44 @@ def read_blogs():
             b = b + 1; x = b
             print(x, item.get_text(), "\n ", item.a)
             if item.a is None:
-                entry_dict = {str(item.strong.text) : str(item.get_text())}
-                print(entry_dict)
+                entry_dict[str(item.strong.text)] =  str(item.get_text()) #This should make keys and values that work without the need to manually assign them
+
             elif item.a is not None:
                 print(item.a.get("href"))
-                func_list.append(item.a.get("href"))
+                if "http://" not in item.a.get("href"):
+                    pass
+                else:
+                    url_list.append(item.a.get("href"))
+    print("Reading sub lists")
+    url_list, entry_dict = read_sublinks(url_list, entry_dict)
 
-    func_list = list(dict.fromkeys(func_list))
-    print("Testing: {}".format(func_list), "\n ", entry_dict)
+    url_list = list(dict.fromkeys(url_list))
+    print("Testing: {}".format(url_list), "\n ")
+    print("formed dictionary of articles ", entry_dict.keys())
+    data = {"Article": [entry_dict.keys()], "Text": [entry_dict.values()]}
+    print(entry_dict.values())
+    df_mk = pd.DataFrame.from_dict(data)
+    print(df_mk)
+
+
+def read_sublinks(func_list, entry_dict):
+    for link in func_list:
+        print(link)
+        if "themonstersknow" in link:
+            print("valid url")
+            file = requests.get(link)
+            soup = BeautifulSoup(file.content, "html.parser")
+            title = soup.find("h1", class_="entry-title")
+            print(title.string)
+            read_data = soup.find_all("div", class_="entry-content")
+            for item in read_data:
+                entry_dict[title.string] = item.get_text()
+        else:
+            print("invalid url")
+            pass
+    return func_list, entry_dict
+
+
 
 
 
