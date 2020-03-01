@@ -4,7 +4,8 @@ from bs4 import BeautifulSoup
 '''
 This section of the monster analysis pack focused on using the NLTK (or similar tools) to analyse
 The text found inside of the monsters know, a website dedicated to monster tactics http://themonstersknow.com/
-This can be done by using beautiful soup to scrape information from each article
+This can be done by using beautiful soup to scrape information from each article, forming a dataframe containing said information
+And pushing that through a machine learning function
 '''
 
 def read_blogs():
@@ -14,7 +15,7 @@ def read_blogs():
         page_urls.append("cr-{}".format(i+1)) #Automating target pages
     print(page_urls)
 
-    for i in range(len(page_urls)-15): #Is currently set to the first 6 entries for speed
+    for i in range(len(page_urls)): #Is currently set to the first 6 entries for speed
         address = "http://themonstersknow.com/tag/{}/".format(page_urls[i])
         file = requests.get(address)
         print(address)
@@ -47,7 +48,7 @@ def read_blogs():
 
 def form_df(entry_dict):
     df_mk = pd.DataFrame(columns=["article_id", "text"])
-    for k, v in entry_dict.items():
+    for k, v in sorted (entry_dict.items()):
         print(k, "is the key for: ", v)
         df_mk = df_mk.append({"article_id": k, "text": v}, ignore_index=True)
     print(df_mk)
