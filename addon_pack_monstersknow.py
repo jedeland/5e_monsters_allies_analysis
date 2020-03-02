@@ -1,6 +1,9 @@
-import pandas as pd; import numpy as np;
-import requests; import os.path; import re
-import tensorflow as tf
+from __future__ import absolute_import, division, print_function
+import pandas as pd; import numpy as np
+import requests; import os.path; import re; import collections
+import nltk as nltk
+from nltk.corpus import stopwords; from nltk.cluster.util import cosine_distance
+import networkx as nx
 from bs4 import BeautifulSoup
 '''
 This section of the monster analysis pack focused on using the NLTK (or similar tools) to analyse
@@ -8,9 +11,9 @@ The text found inside of the monsters know, a website dedicated to monster tacti
 This can be done by using beautiful soup to scrape information from each article, forming a dataframe containing said information
 And pushing that through a machine learning function
 '''
-#https://medium.com/jatana/unsupervised-text-summarization-using-sentence-embeddings-adb15ce83db1
 
-def summarise_data(df):
+
+def clean_data(df):
     print("Starting up the machine learning, this should either be done by scrapping the site using beautiful soup, or via an SQL or CSV file that has been printed to and read from")
     df_targ = df.loc[df["article_id"] == "Angel Tactics"] #Test case using one article, future case will use for loop and iteration, reminder https://stackoverflow.com/questions/16476924/how-to-iterate-over-rows-in-a-dataframe-in-pandas
     article = str(df_targ["text"].values)
@@ -19,8 +22,21 @@ def summarise_data(df):
     sections = article.split(".Next: ")
     print(sections[1])
     text = str(sections[0])
-
+    read_article(text)
     #Line divides the article in two, removing the "share, save ect ect" part
+
+#The below function references the following article, which is being used as a basis for the implementation for NLTK usage
+#https://medium.com/hackernoon/abstractive-text-summarization-tutorial-2-text-representation-made-very-easy-ef4511a1a46
+def read_article(text):
+    print("Reading : {}".format(text))
+    article = text[0].split(". ")
+    sentence_lst = []
+    for sentence in article:
+        print(sentence)
+        sentence_lst.append(sentence.replace("[^a-zA-Z]", " ").split(" "))
+        sentence_lst.pop()
+    return sentence_lst
+
 
 def read_blogs():
     page_urls = ["cr-1-4", "cr-1-2"]
@@ -59,7 +75,8 @@ def read_blogs():
     print("Testing: {}".format(url_list), "\n ")
     print("formed dictionary of articles ", entry_dict.keys())
     df = form_df(entry_dict)
-    summarise_data(df)
+    clean_data(df)
+
 
 
 def form_df(entry_dict):
