@@ -1,5 +1,6 @@
 import pandas as pd; import numpy as np;
 import requests; import os.path; import re
+import tensorflow as tf
 from bs4 import BeautifulSoup
 '''
 This section of the monster analysis pack focused on using the NLTK (or similar tools) to analyse
@@ -7,9 +8,23 @@ The text found inside of the monsters know, a website dedicated to monster tacti
 This can be done by using beautiful soup to scrape information from each article, forming a dataframe containing said information
 And pushing that through a machine learning function
 '''
+#https://medium.com/jatana/unsupervised-text-summarization-using-sentence-embeddings-adb15ce83db1
+
+def summarise_data(df):
+    print("Starting up the machine learning, this should either be done by scrapping the site using beautiful soup, or via an SQL or CSV file that has been printed to and read from")
+    df_targ = df.loc[df["article_id"] == "Angel Tactics"] #Test case using one article, future case will use for loop and iteration, reminder https://stackoverflow.com/questions/16476924/how-to-iterate-over-rows-in-a-dataframe-in-pandas
+    article = str(df_targ["text"].values)
+    pretty_article = article
+    print(pretty_article, type(pretty_article))#Not perfect but better and more readable
+    sections = article.split(".Next: ")
+    print(sections[1])
+    text = str(sections[0])
+
+    #Line divides the article in two, removing the "share, save ect ect" part
 
 def read_blogs():
     page_urls = ["cr-1-4", "cr-1-2"]
+    print("Reading blogs this may take a while.")
     url_list, entry_dict = [], {} #list will be passed to another function to read sub pages
     for i in range(21):
         page_urls.append("cr-{}".format(i+1)) #Automating target pages
@@ -44,6 +59,7 @@ def read_blogs():
     print("Testing: {}".format(url_list), "\n ")
     print("formed dictionary of articles ", entry_dict.keys())
     df = form_df(entry_dict)
+    summarise_data(df)
 
 
 def form_df(entry_dict):
@@ -56,6 +72,7 @@ def form_df(entry_dict):
 
 
 def read_sublinks(func_list, entry_dict):
+    print("Reading blogs in detail, this may take a while.")
     for link in func_list:
         print(link)
         if "themonstersknow" in link:
