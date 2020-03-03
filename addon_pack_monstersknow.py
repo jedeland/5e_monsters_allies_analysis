@@ -26,7 +26,7 @@ def clean_data(df):
     #Line divides the article in two, removing the "share, save ect ect" part
 
 #The below function references the following article, which is being used as a basis for the implementation for NLTK usage
-#https://medium.com/hackernoon/abstractive-text-summarization-tutorial-2-text-representation-made-very-easy-ef4511a1a46
+#https://towardsdatascience.com/understand-text-summarization-and-create-your-own-summarizer-in-python-b26a9f09fc70
 def read_article(text):
     print("Reading : {}".format(text))
     article = text[0].split(". ")
@@ -36,6 +36,22 @@ def read_article(text):
         sentence_lst.append(sentence.replace("[^a-zA-Z]", " ").split(" "))
         sentence_lst.pop()
     return sentence_lst
+def find_similarities(sents, stop_words):
+    similarity_matrix = np.zeros((len(sents), len(sents)))
+    for sent_id_1 in range(len(sents)):
+        for sent_id_2 in range(len(sents)):
+            if sent_id_1 == sent_id_2:
+                continue
+            similarity_matrix[sent_id_1] [sent_id_2] = sentence_similarity(sents[sent_id_1], sents[sent_id_2], stop_words)
+            return similarity_matrix
+
+def sentance_similarity(sent_id_1, sent_id_2, stopwords=None):
+    if stopwords is None:
+        stopwords = []
+
+    sent_id_1 = [c.lower for c in sent_id_1]
+    sent_id_2 = [c.lower for c in sent_id_2]
+
 
 
 def read_blogs():
