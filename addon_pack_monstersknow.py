@@ -20,19 +20,22 @@ def clean_data(df):
     sections = article.split(".Next: ")
     text = str(sections[0])
     #read_article(text)
-    gen_summary(text, 2)
+    gen_summary(text, 5)
     #Line divides the article in two, removing the "share, save ect ect" part
 
 #The below function references the following article, which is being used as a basis for the implementation for NLTK usage
 #https://towardsdatascience.com/understand-text-summarization-and-create-your-own-summarizer-in-python-b26a9f09fc70
 def read_article(text):
     print("Reading : {}".format(text))
-    article = text[0].split(". ")
+    article = text.split(". ")
     sentence_lst = []
     for sentence in article:
         print(sentence)
         sentence_lst.append(sentence.replace("[^a-zA-Z]", " ").split(" "))
-        sentence_lst.pop()
+    print(sentence_lst)
+    sentence_lst.pop()
+
+
     return sentence_lst
 
 def gen_summary(article, top_n=5):
