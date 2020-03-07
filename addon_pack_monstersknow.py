@@ -36,6 +36,24 @@ def read_article(text):
         sentence_lst.append(sentence.replace("[^a-zA-Z]", " ").split(" "))
         sentence_lst.pop()
     return sentence_lst
+
+def gen_similarities(article, top_n=5):
+    stop_words = stopwords.words("english")
+    summarize_text = []
+    #Tokenize text
+    sentences = read_article(article)
+    sentence_sim_matrix = gen_similarities(sentences, stop_words)
+    #Rank sentences
+    sentence_sim_graph = nx.from_numpy_array(sentence_sim_matrix)
+    scores = nx.pagerank(sentence_sim_graph)
+    #Sort rank, pick top
+    rank_sentence = sorted(((scores[i],s) for i, s in
+                            enumerate(sentences)), reversed=True)
+    print("Indexes of top ranked_sentence order are :",
+          rank_sentence)
+    for i in range(top_n):
+        summarize_text.append(" ".join(rank_sentence[i][1]))
+
 def find_similarities(sents, stop_words):
     similarity_matrix = np.zeros((len(sents), len(sents)))
     for sent_id_1 in range(len(sents)):
@@ -43,14 +61,31 @@ def find_similarities(sents, stop_words):
             if sent_id_1 == sent_id_2:
                 continue
             similarity_matrix[sent_id_1] [sent_id_2] = sentence_similarity(sents[sent_id_1], sents[sent_id_2], stop_words)
-            return similarity_matrix
 
-def sentance_similarity(sent_id_1, sent_id_2, stopwords=None):
+    return similarity_matrix
+
+
+def sentence_similarity(sent_id_1, sent_id_2, stopwords=None):
     if stopwords is None:
         stopwords = []
 
     sent_id_1 = [c.lower for c in sent_id_1]
     sent_id_2 = [c.lower for c in sent_id_2]
+    all_words = list(set(sent_id_1 + sent_id_2))
+    vec1 = [0] * len(all_words)
+    vec2 = [0] * len(all_words)
+    #create vector for first sentance
+    for w in sent_id_1:
+        if w in stopwords:
+            continue
+        vec1[all_words.index(w)] += 1
+    #create vector for second sentance
+    for i in sent_id_2:
+        if i in stopwords:
+            continue
+        vec2[all_words.index(i)] += 1
+
+    return 1 - cosine_distance(vec1, vec2)
 
 
 
