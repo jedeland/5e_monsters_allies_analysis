@@ -17,12 +17,10 @@ def clean_data(df):
     print("Starting up the machine learning, this should either be done by scrapping the site using beautiful soup, or via an SQL or CSV file that has been printed to and read from")
     df_targ = df.loc[df["article_id"] == "Angel Tactics"] #Test case using one article, future case will use for loop and iteration, reminder https://stackoverflow.com/questions/16476924/how-to-iterate-over-rows-in-a-dataframe-in-pandas
     article = str(df_targ["text"].values)
-    pretty_article = article
-    print(pretty_article, type(pretty_article))#Not perfect but better and more readable
     sections = article.split(".Next: ")
-    print(sections[1])
     text = str(sections[0])
-    read_article(text)
+    #read_article(text)
+    gen_summary(text, 2)
     #Line divides the article in two, removing the "share, save ect ect" part
 
 #The below function references the following article, which is being used as a basis for the implementation for NLTK usage
@@ -37,22 +35,23 @@ def read_article(text):
         sentence_lst.pop()
     return sentence_lst
 
-def gen_similarities(article, top_n=5):
+def gen_summary(article, top_n=5):
     stop_words = stopwords.words("english")
     summarize_text = []
     #Tokenize text
     sentences = read_article(article)
-    sentence_sim_matrix = gen_similarities(sentences, stop_words)
+    sentence_sim_matrix = find_similarities(sentences, stop_words)
     #Rank sentences
     sentence_sim_graph = nx.from_numpy_array(sentence_sim_matrix)
     scores = nx.pagerank(sentence_sim_graph)
     #Sort rank, pick top
     rank_sentence = sorted(((scores[i],s) for i, s in
-                            enumerate(sentences)), reversed=True)
+                            enumerate(sentences)), reverse=True)
     print("Indexes of top ranked_sentence order are :",
           rank_sentence)
     for i in range(top_n):
         summarize_text.append(" ".join(rank_sentence[i][1]))
+    print("Summarize Text: \n", ". ".join(summarize_text))
 
 def find_similarities(sents, stop_words):
     similarity_matrix = np.zeros((len(sents), len(sents)))
