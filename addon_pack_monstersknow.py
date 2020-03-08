@@ -16,6 +16,7 @@ And pushing that through a machine learning function
 
 #The below function references the following article, which is being used as a basis for the implementation for NLTK usage
 #The below functions relate to the NLTK ML library
+#Future development should focus on summarizing particular paragraphs as articles are usually split up into seperate monsters that are related to the over all type
 #https://towardsdatascience.com/understand-text-summarization-and-create-your-own-summarizer-in-python-b26a9f09fc70
 def read_article(text):
     print("Reading : {}".format(text))
@@ -24,10 +25,7 @@ def read_article(text):
     for sentence in article:
         print(sentence)
         sentence_lst.append(sentence.replace("[^a-zA-Z]", " ").split(" "))
-    print(sentence_lst)
     sentence_lst.pop()
-
-
     return sentence_lst
 
 def gen_summary(article, top_n):
@@ -42,8 +40,7 @@ def gen_summary(article, top_n):
     #Sort rank, pick top
     rank_sentence = sorted(((scores[i],s) for i, s in
                             enumerate(sentences)), reverse=True)
-    print("Indexes of top ranked_sentence order are :",
-          rank_sentence)
+    #print("Indexes of top ranked_sentence order are :",rank_sentence)
     for i in range(top_n):
         summarize_text.append(" ".join(rank_sentence[i][1]))
     print("Summarize Text: \n", ". ".join(summarize_text))
@@ -86,6 +83,11 @@ def sentence_similarity(sent_id_1, sent_id_2, stopwords=None):
 def read_blogs():
     if os.path.exists("articles.xlsx"):
         print("Using preexisting excell sheet instead")
+        df = pd.read_excel("articles.xlsx", index_col=0)
+        print(df)
+        for i in range(5):
+            print("*")
+        clean_data(df)
     else:
         page_urls = ["cr-1-4", "cr-1-2"]
         print("Reading blogs this may take a while.")
@@ -133,7 +135,7 @@ def clean_data(df):
     sections = article.split(".Next: ")
     text = str(sections[0])
     sent_list = read_article(text)
-    num_sum = round(len(sent_list) * .30)
+    num_sum = round(len(sent_list) * .20)
 
     #read_article(text)
     gen_summary(text, num_sum)
