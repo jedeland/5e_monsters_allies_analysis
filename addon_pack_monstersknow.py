@@ -2,7 +2,7 @@ from __future__ import absolute_import, division, print_function
 import pandas as pd; import numpy as np; from sqlalchemy import create_engine, sql
 import requests; import os.path;
 import nltk as nltk
-from nltk.corpus import stopwords; from nltk.cluster.util import cosine_distance
+from nltk.corpus import stopwords; from nltk.cluster.util import cosine_distance; from nltk import pos_tag
 import networkx as nx
 from bs4 import BeautifulSoup
 '''
@@ -29,10 +29,13 @@ def read_article(text):
     return sentence_lst
 
 def gen_summary(article, top_n):
+    #Future development should look into using sentiment to guide output, find here http://www.nltk.org/howto/sentiment.html
     stop_words = stopwords.words("english")
     summarize_text = []
     #Tokenize text
     sentences = read_article(article)
+    find_names(article, sentences)
+
     sentence_sim_matrix = find_similarities(sentences, stop_words)
     #Rank sentences
     sentence_sim_graph = nx.from_numpy_array(sentence_sim_matrix)
@@ -44,6 +47,23 @@ def gen_summary(article, top_n):
     for i in range(top_n):
         summarize_text.append(" ".join(rank_sentence[i][1]))
     print("Summarize Text: \n", ". ".join(summarize_text))
+
+
+def find_names(article, sentences):
+    #Find names using chunking lable, using information from http://www.nltk.org/howto/chunk.html
+    sent_names = sentences
+    sent_names = nltk.sent_tokenize(article)
+    sent_names = [nltk.word_tokenize(sent) for sent in sent_names]
+    sent_names = [nltk.pos_tag(sent) for sent in sent_names]
+    print(sent_names)
+    names = []
+    for tagged_sents in sent_names:
+        for chunk in nltk.ne_chunk(tagged_sents):
+            if type(chunk) == nltk.tree.Tree:
+                if chunk.label() == "PERSON":
+                    names.append(' '.join([n[0] for n in chunk]))
+    print(names)
+
 
 def find_similarities(sents, stop_words):
     similarity_matrix = np.zeros((len(sents), len(sents)))
