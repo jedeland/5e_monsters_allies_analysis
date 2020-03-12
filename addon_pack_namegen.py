@@ -17,6 +17,9 @@ Courtesy of u/Alazypanda -
 If need random fantastical sounding names I quite literally take the "generic" or chemical names of medication
 Like the leader of the mafia my players are working with, Levo Thyroxine.
 Might be worth adding some to the data base, but then its up to you to find where to split the word for first/lastname to make it sound right.
+
+Wikientries are now being used to form "organic" lists, the problem with these entries is that they are usually using seperate formats from 
+one another, meaning that there is no standardised function that i can create to pass each link through
 '''
 
 npc_df = None
@@ -88,6 +91,19 @@ def german_surnames(dataframe):
     dataframe["name"] = dataframe["name"].str.replace("[^\w\s]", "")
     print(dataframe.tail(10))
     return dataframe
+
+def italian_names():
+    file = requests.get("https://en.wiktionary.org/wiki/Appendix:Italian_given_names")
+    soup = BeautifulSoup(file.content, "html.parser")
+    rec_data = soup.find_all("dd")
+    name_div = False
+    for item in rec_data:
+        if item.string == "Abbondanza":#First female entry
+            name_div = True
+        if item.string == "Zelmira":#Final part of page, exits loop
+            break
+        if item.string is not None:
+            adder = str(item.string)
 
 def form_npc_csv():
     #There is a strong argument to make this into an SQL file aswell, but for now CSV will do
