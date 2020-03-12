@@ -57,8 +57,6 @@ def german_names(): #This function is a test case of reading a wikipedia list to
                 name_divided = True
             if item.string is not None:
                 adder = str(item.string)
-
-
                 if not name_divided:
                     df = df.append({"name":adder, "tag":"M", "origin":"GER"}, ignore_index=True)
                 elif name_divided:
@@ -97,13 +95,23 @@ def italian_names():
     soup = BeautifulSoup(file.content, "html.parser")
     rec_data = soup.find_all("dd")
     name_div = False
+    df = pd.DataFrame(columns=["name", "tag", "origin"])
     for item in rec_data:
         if item.string == "Abbondanza":#First female entry
             name_div = True
         if item.string == "Zelmira":#Final part of page, exits loop
+            df = df.append({"name": adder, "tag": "F", "origin": "ITA"}, ignore_index=True)
             break
         if item.string is not None:
             adder = str(item.string)
+            if not name_div:
+                df = df.append({"name": adder, "tag":"M", "origin":"ITA"}, ignore_index=True)
+            else:
+                df = df.append({"name": adder, "tag":"F", "origin": "ITA"}, ignore_index=True)
+    df["name"] = df["name"].str.replace("[^\w\s]", "")
+    print(df)
+    return df
+
 
 def form_npc_csv():
     #There is a strong argument to make this into an SQL file aswell, but for now CSV will do
@@ -116,4 +124,4 @@ def form_npc_csv():
     df_copy.to_csv("npcs.csv", index=False)
 
 
-form_npc_csv()
+italian_names()
