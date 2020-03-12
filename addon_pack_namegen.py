@@ -112,6 +112,23 @@ def italian_names():
     print(df)
     return df
 
+def italian_surnames():
+    file = requests.get("https://en.wiktionary.org/wiki/Appendix:Italian_surnames")
+    soup = BeautifulSoup(file.content, "html.parser")
+    rec_data = soup.find_all("li")
+    df = pd.DataFrame(columns=["name", "tag", "origin"])
+    for item in rec_data:
+        if item.string == "Zullo":#This is the final part of the page, is used to exit loop
+            adder = str(item.string)
+            df = df.append({"name": adder, "tag": "S", "origin": "ITA"}, ignore_index=True)
+            break
+        if item.string is not None:
+            adder = str(item.string)
+            df = df.append({"name": adder, "tag": "S", "origin": "ITA"}, ignore_index=True)  # S tag is indicative of the surname
+    df["name"] = df["name"].str.replace("[^\w\s]", "")
+    print(df.tail(60))
+    return df
+
 
 def form_npc_csv():
     #There is a strong argument to make this into an SQL file aswell, but for now CSV will do
@@ -124,4 +141,4 @@ def form_npc_csv():
     df_copy.to_csv("npcs.csv", index=False)
 
 
-italian_names()
+italian_surnames()
