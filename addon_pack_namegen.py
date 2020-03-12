@@ -139,6 +139,7 @@ def form_npc_csv():
 
     print(df_copy)
     df_copy.to_csv("npcs.csv", index=False)
+    #DF outputs duplicated even though duplicates are dropped above, needs to be fixed
 
 
 italian_surnames()
