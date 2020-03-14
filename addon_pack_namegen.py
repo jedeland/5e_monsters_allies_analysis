@@ -131,23 +131,23 @@ def italian_surnames():
 
 def form_name_dict():
     name_dict = {}
-    nations = ["French", "Spanish", "Turkish", "Dutch", "Belgian", "Swedish", "Norweigan", "Danish", "Polish"] #Test cases to see if wiktionary will take these as a real argument
-    nation_abrev = ["FRA", "SPA", "TUR", "DUT", "BEL", "SWE", "NOR", "DAN", "POL"]
-    probable_formats = ["dd"]
-    name_div = ["Abbée"]
-    name_fin = ["Zoëlle"]
+    nations = ["French", "Spanish", "Turkish", "Dutch", "Swedish", "Danish", "Polish"] #Test cases to see if wiktionary will take these as a real argument
+    nation_abrev = ["FRA", "SPA", "TUR", "DUT", "SWE", "DAN", "POL"]
+    probable_formats = ["dd", "dd", "dd", "li", "dd", "dd", "tr"]
+    name_div = ["Abbée", "Abdianabel", "Abay", "Aafke", "Aagot", "Aase", "Adelajda"]
+    name_fin = ["Zoëlle", "Zulema", "Zekiye", "Zjarritjen", "Öllegård", "Vibeke", "Żywia"]
     df = pd.DataFrame(columns=["name", "tag", "origin"])
     for i in range(len(nations)):
         divide = False
         argument = "https://en.wiktionary.org/wiki/Appendix:{}_given_names".format(nations[i])
         file = requests.get(argument)
-        if str(file) is "<Response [404]>":
-            continue
-        else:
+        print(str(file), nations[i])
+        if str(file) in "<Response [404]>":
+            pass
+        elif str(file) in "<Response [200]>":
             soup = BeautifulSoup(file.content, "html.parser")
             rec_data = soup.find_all(probable_formats[i])
             for item in rec_data:
-                print(item)
                 if item.string == name_div[i]:  # First female entry
                     divide = True
                 if item.string == name_fin[i]:
@@ -162,6 +162,7 @@ def form_name_dict():
                         df = df.append({"name": adder, "tag": "F", "origin": "{}".format(nation_abrev[i])}, ignore_index=True)
     df["name"] = df["name"].str.replace("[^\w\s]", "")
     print(df.tail(60))
+
     return df
 
 
