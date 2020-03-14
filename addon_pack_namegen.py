@@ -158,13 +158,16 @@ def form_name_dict():
                     adder = str(item.string)
                     parts = re.split(r'[;,\s]\s*' , adder)#removes any double names that are not hyphinated
                     adder = parts[0]
+                    if not adder.strip():
+                        print("Not Found")
+                        pass
                     print(adder)
                     if not divide:
                         df = df.append({"name": adder, "tag": "M", "origin": "{}".format(nation_abrev[i])}, ignore_index=True)
                     else:
                         df = df.append({"name": adder, "tag": "F", "origin": "{}".format(nation_abrev[i])}, ignore_index=True)
     df["name"] = df["name"].str.replace("[^\w\s]", "")
-    print(df.tail(60))
+    print(df.tail(160))
 
     return df
 
