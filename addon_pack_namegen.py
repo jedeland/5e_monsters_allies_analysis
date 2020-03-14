@@ -1,5 +1,5 @@
 import pandas as pd; import numpy as np;
-import requests; import os.path
+import requests; import os.path; import re
 from bs4 import BeautifulSoup
 
 import monster_analysis
@@ -131,31 +131,34 @@ def italian_surnames():
 
 def form_name_dict():
     name_dict = {}
-    nations = ["French", "Spanish", "Turkish", "Dutch", "Swedish", "Danish", "Polish"] #Test cases to see if wiktionary will take these as a real argument
-    nation_abrev = ["FRA", "SPA", "TUR", "DUT", "SWE", "DAN", "POL"]
-    probable_formats = ["dd", "dd", "dd", "li", "dd", "dd", "tr"]
-    name_div = ["Abbée", "Abdianabel", "Abay", "Aafke", "Aagot", "Aase", "Adelajda"]
-    name_fin = ["Zoëlle", "Zulema", "Zekiye", "Zjarritjen", "Öllegård", "Vibeke", "Żywia"]
+    nations = ["French", "Italian", "Spanish", "Turkish", "Dutch", "Danish", "Swedish",  "Polish"] #Test cases to see if wiktionary will take these as a real argument
+    nation_abrev = ["FRA", "ITA", "SPA", "TUR", "DUT", "DAN", "SWE", "POL"]
+    probable_formats = ["dd", "dd", "dd", "dd", "li", "dd", "dd", "td"]
+    name_div = ["Abbée", "Abbondanza" "Abdianabel", "Abay", "Aafke", "Aase", "Aagot",  "Adelajda"]
+    name_fin = ["Zoëlle", "Zelmira", "Zulema", "Zekiye", "Zjarritjen", "Vibeke", "Öllegård", "Żywia"]
     df = pd.DataFrame(columns=["name", "tag", "origin"])
     for i in range(len(nations)):
         divide = False
         argument = "https://en.wiktionary.org/wiki/Appendix:{}_given_names".format(nations[i])
         file = requests.get(argument)
-        print(str(file), nations[i])
+        print(str(file), "Iteration is {}".format(i), nations[i])
         if str(file) in "<Response [404]>":
             pass
         elif str(file) in "<Response [200]>":
             soup = BeautifulSoup(file.content, "html.parser")
             rec_data = soup.find_all(probable_formats[i])
             for item in rec_data:
-                if item.string == name_div[i]:  # First female entry
+                if item.string == name_div[i-1]:  # First female entry
                     divide = True
-                if item.string == name_fin[i]:
+                if item.string == name_fin[i-1]:
                     adder = str(item.string)
                     df = df.append({"name": adder, "tag": "F", "origin": "{}".format(nation_abrev[i])}, ignore_index=True)
                     break
                 if item.string is not None:
                     adder = str(item.string)
+                    parts = re.split(r'[;,\s]\s*' , adder)#removes any double names that are not hyphinated
+                    adder = parts[0]
+                    print(adder)
                     if not divide:
                         df = df.append({"name": adder, "tag": "M", "origin": "{}".format(nation_abrev[i])}, ignore_index=True)
                     else:
