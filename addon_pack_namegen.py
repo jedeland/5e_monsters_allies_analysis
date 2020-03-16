@@ -167,6 +167,8 @@ def form_name_dict():
                     else:
                         df = df.append({"name": adder, "tag": "F", "origin": "{}".format(nation_abrev[i])}, ignore_index=True)
     df["name"] = df["name"].str.replace("[^\w\s]", "")
+    df = df.dropna(axis=0, how='any', thresh=None, subset=None, inplace=False)
+    df = df.drop_duplicates(subset="name", keep="first")
     print(df.tail(160))
 
     return df
