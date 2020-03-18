@@ -134,7 +134,7 @@ def form_name_dict():
     nations = ["French", "Italian", "Spanish", "Turkish", "Dutch", "Danish", "Swedish",  "Polish"] #Test cases to see if wiktionary will take these as a real argument
     nation_abrev = ["FRA", "ITA", "SPA", "TUR", "DUT", "DAN", "SWE", "POL"]
     probable_formats = ["dd", "dd", "dd", "dd", "li", "dd", "dd", "td"]
-    name_div = ["Abbée", "Abbondanza" "Abdianabel", "Abay", "Aafke", "Aase", "Aagot",  "Adelajda"]
+    name_div = ["Abbée", "Abbondanza" "Abdianabel", "Abay", "Aafke", "Aase", "Aagot",  "Adela"]
     name_fin = ["Zoëlle", "Zelmira", "Zulema", "Zekiye", "Zjarritjen", "Vibeke", "Öllegård", "Żywia"]
     df = pd.DataFrame(columns=["name", "tag", "origin"])
     for i in range(len(nations)):
@@ -169,7 +169,7 @@ def form_name_dict():
     df["name"] = df["name"].str.replace("[^\w\s]", "")
     df = df.dropna(axis=0, how='any', thresh=None, subset=None, inplace=False)
     df = df.drop_duplicates(subset="name", keep="first")
-    print(df.tail(160))
+    print(df.tail(60))
 
     return df
 
