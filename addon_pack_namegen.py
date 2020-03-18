@@ -1,9 +1,8 @@
 import pandas as pd; import numpy as np;
-import requests; import os.path; import re
+import requests; import os; import re
 from bs4 import BeautifulSoup
 
-import monster_analysis
-import sqlalchemy as sql; import string; import import_data
+
 
 #This addon pack focuses on the application of current and historic data to create more organic naming conventions for NPC's
 #The following dataset will act as an anchor for this https://www.ssb.no/en/navn#renderAjaxBanner
@@ -169,6 +168,7 @@ def form_name_dict():
     df["name"] = df["name"].str.replace("[^\w\s]", "")
     df = df.dropna(axis=0, how='any', thresh=None, subset=None, inplace=False)
     df = df.drop_duplicates(subset="name", keep="first")
+    form_files(df)
     print(df.tail(60))
 
     return df
@@ -179,6 +179,13 @@ def modular_names(dict_in):
     file = requests.get("https://en.wiktionary.org/wiki/Appendix:Italian_surnames")
     soup = BeautifulSoup(file.content, "html.parser")
     rec_data = soup.find_all()
+
+def form_files(data):
+    #Aims to create a CSV, Excell and SQL version of the dataframe
+
+    data.to_csv("npcs.csv", index=False)
+    data.to_excel("npcs.xlsx", index=False)
+    data.to_sql()
 
 def form_npc_csv():
     #There is a strong argument to make this into an SQL file aswell, but for now CSV will do
